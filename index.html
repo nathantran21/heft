@@ -119,7 +119,8 @@ input,textarea{font-family:inherit;}
 .sidebar__badge{min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;display:grid;place-items:center;}
 .sidebar__toggle{width:31px;height:31px;flex-shrink:0;display:grid;place-items:center;border:1px solid var(--border);background:var(--surface-2);color:var(--text-dim);border-radius:8px;cursor:pointer;padding:0;}
 .sidebar__toggle:hover{background:var(--surface-3);color:var(--text);border-color:var(--border);}
-.sidebar__content{flex:1;min-height:0;overflow-y:auto;padding:14px 13px 16px;display:flex;flex-direction:column;gap:20px;transition:opacity .16s;white-space:nowrap;}
+.sidebar__content{flex:1;min-height:0;overflow-y:auto;padding:14px 13px 16px;display:flex;flex-direction:column;gap:20px;transition:opacity .16s;white-space:nowrap;scrollbar-width:none;-ms-overflow-style:none;}
+.sidebar__content::-webkit-scrollbar{display:none;}
 .sidebar[data-open="false"] .sidebar__content{opacity:0;pointer-events:none;}
 .sidebar__group{display:flex;flex-direction:column;gap:9px;}
 .sidebar__content > .sidebar__group{border-top:1px solid var(--border);padding-top:17px;}
@@ -742,7 +743,6 @@ html[data-dark="true"],html[data-dark="true"] body{background:oklch(0.17 0.008 6
 #app{background:
   radial-gradient(1100px 720px at 12% -8%,var(--mesh-1) 0%,transparent 58%),
   radial-gradient(900px 640px at 105% 12%,var(--mesh-3) 0%,transparent 55%),
-  radial-gradient(1000px 800px at 50% 115%,var(--mesh-2) 0%,transparent 60%),
   var(--mesh-base);}
 #root{background:transparent;}
 .appmain,.board{background:transparent;}
@@ -1262,7 +1262,7 @@ function FilterSidebar({open,onToggle,activeWeights,toggleWeight,activeTag,setTa
   return(
     <aside className="sidebar" data-open={open?'true':'false'} style={open&&width?{width:width+'px',transition:resizing?'none':undefined}:undefined}>
       <div className="sidebar__head">
-        {open?<><span className="sidebar__title"><Icon name="filter" size={14}/>Filters</span>{activeCount>0&&<span className="sidebar__badge">{activeCount}</span>}</>:<>{activeCount>0?<span className="sidebar__badge">{activeCount}</span>:<span/>}</>}
+        {open?<><span className="sidebar__title">Filters</span>{activeCount>0&&<span className="sidebar__badge">{activeCount}</span>}</>:<>{activeCount>0?<span className="sidebar__badge">{activeCount}</span>:<span/>}</>}
         <div className="sidebar__head-actions">
           <button className="sidebar__toggle" onClick={onToggle} title={open?'Collapse':'Expand'}><Icon name={open?'collapseL':'expandR'} size={19}/></button>
         </div>
@@ -2047,11 +2047,6 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
               <label className="field"><span className="field__lbl">Last name</span><input className="input" value={last} placeholder="Last" onChange={(e)=>setLast(e.target.value)}/></label>
             </div>
             <label className="field"><span className="field__lbl">Email</span><input className="input" type="email" value={email} placeholder="you@studio.com" onChange={(e)=>setEmail(e.target.value)}/></label>
-            <div className="field">
-              <span className="field__lbl">Plan</span>
-              <div className="seg">{['Personal','Studio'].map(pl=><button key={pl} type="button" className="seg__opt" data-on={plan===pl?'true':'false'} onClick={()=>setPlan(pl)}>{pl}</button>)}</div>
-              <p className="plan-note">{plan==='Studio'?'Adds team members, shared boards, and client portals.':'For solo freelancers. Includes habits, weight system, and tags.'}</p>
-            </div>
             <SetSection label="Account">
               <SetRow icon="x" color="var(--danger)" label="Log out" danger chevron onClick={onLogout}/>
             </SetSection>
@@ -2166,6 +2161,7 @@ function nowPastTime(hhmm){if(!hhmm)return false;const parts=hhmm.split(':');con
 // Small always-visible progress ring for the focused day. Progress feedback is
 // the core loop: seeing the ring close is what makes the next check-off pull.
 function DayProgress({done,total}){
+  return null;
   if(total===0)return null;
   const R=9,C=2*Math.PI*R;
   const pct=done/total;
