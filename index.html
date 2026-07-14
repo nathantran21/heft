@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Heft"/>
@@ -23,7 +23,7 @@
 [data-theme="light"]{
   --page:oklch(0.925 0.014 74);--bg:oklch(0.966 0.012 80);
   --surface:oklch(0.995 0.006 85);--surface-2:oklch(0.945 0.013 77);--surface-3:oklch(0.905 0.015 76);
-  --text:oklch(0.28 0.014 55);--text-dim:oklch(0.50 0.014 58);--text-faint:oklch(0.64 0.014 60);
+  --text:oklch(0.28 0.014 55);--text-dim:oklch(0.50 0.014 58);--text-faint:oklch(0.57 0.014 60);
   --border:oklch(0.885 0.012 72);--border-strong:oklch(0.80 0.014 70);--w-none:oklch(0.80 0.014 70);
   --accent:oklch(0.52 0.075 52);--accent-ink:#fbf7f1;
   --danger:oklch(0.55 0.15 28);--overlay:rgba(36,28,20,0.42);
@@ -31,7 +31,7 @@
 [data-theme="dark"]{
   --page:oklch(0.155 0.006 60);--bg:oklch(0.205 0.008 60);
   --surface:oklch(0.252 0.009 62);--surface-2:oklch(0.226 0.009 60);--surface-3:oklch(0.305 0.011 62);
-  --text:oklch(0.93 0.01 85);--text-dim:oklch(0.72 0.012 78);--text-faint:oklch(0.56 0.012 70);
+  --text:oklch(0.93 0.01 85);--text-dim:oklch(0.72 0.012 78);--text-faint:oklch(0.63 0.012 70);
   --border:oklch(0.33 0.01 62);--border-strong:oklch(0.43 0.012 62);--w-none:oklch(0.46 0.012 62);
   --accent:oklch(0.72 0.085 62);--accent-ink:#1c1710;
   --danger:oklch(0.70 0.13 32);--overlay:rgba(8,6,4,0.6);
@@ -130,7 +130,7 @@ input,textarea{font-family:inherit;}
 .sidebar__sechd{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;background:transparent;border:0;padding:2px 0;cursor:pointer;font-family:inherit;text-align:left;}
 .sidebar__caret{display:grid;place-items:center;color:var(--text-faint);transition:transform .2s cubic-bezier(.34,1.4,.64,1);}
 .sidebar__caret[data-open="false"]{transform:rotate(-90deg);}
-.sidebar__lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);}
+.sidebar__lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);}
 .sidebar__chips{display:flex;flex-direction:column;gap:6px;}
 .sidebar__editbtn{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:6px;padding:6px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface-2);color:var(--text-dim);font-size:11.5px;font-weight:600;cursor:pointer;}
 .sidebar__editbtn:hover{border-color:var(--border-strong);color:var(--text);}
@@ -155,7 +155,7 @@ input,textarea{font-family:inherit;}
 .minical__arrow{width:24px;height:24px;display:grid;place-items:center;border:0;background:transparent;color:var(--text-dim);border-radius:7px;cursor:pointer;padding:0;}
 .minical__arrow:hover{background:var(--surface-3);color:var(--text);}
 .minical__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;}
-.minical__dowcell{text-align:center;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--text-faint);padding-bottom:1px;}
+.minical__dowcell{text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--text-faint);padding-bottom:1px;}
 .minical__cell{position:relative;height:30px;display:grid;place-items:center;border:0;background:transparent;border-radius:8px;cursor:pointer;padding:0;font-family:inherit;}
 .minical__cell--empty{cursor:default;}
 .minical__num{font-size:11px;font-weight:600;color:var(--text);line-height:1;}
@@ -179,7 +179,7 @@ input,textarea{font-family:inherit;}
 .habit__week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
 .habit__day{display:flex;flex-direction:column;align-items:center;gap:5px;border:0;background:transparent;cursor:pointer;padding:5px 0;border-radius:8px;font-family:inherit;min-width:0;}
 .habit__day:not([data-future="true"]):hover{background:var(--surface-3);}
-.habit__daylbl{font-size:8.5px;font-weight:700;color:var(--text-faint);}
+.habit__daylbl{font-size:9.5px;font-weight:700;color:var(--text-faint);}
 /* Habit dots — always show circle border; design-spec approach */
 .habit__daydot{width:17px;height:17px;box-sizing:border-box;border-radius:50%;border:1.5px solid var(--border-strong);background:transparent;display:grid;place-items:center;color:transparent;transition:background .12s,border-color .12s,box-shadow .12s;}
 .habit__day[data-done="true"] .habit__daydot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
@@ -196,7 +196,7 @@ input,textarea{font-family:inherit;}
 .col__icon{display:grid;place-items:center;color:var(--text-faint);flex:0 0 auto;}
 .col__icon[data-stage="doing"]{color:var(--accent);}
 .col__icon[data-stage="done"]{color:var(--w-light);}
-.col__name{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);}
+.col__name{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);}
 .col__count{font-size:11px;font-weight:700;color:var(--text-faint);background:var(--surface-3);border-radius:999px;min-width:20px;height:19px;display:grid;place-items:center;padding:0 6px;}
 .col__spacer{flex:1;}
 .col__add{display:grid;place-items:center;width:27px;height:27px;border:1px solid transparent;background:transparent;color:var(--text-faint);border-radius:7px;cursor:pointer;padding:0;}
@@ -232,12 +232,12 @@ input,textarea{font-family:inherit;}
 @media(max-width:479px){.card__grip{opacity:.6;width:38px;height:38px;}
   .check{width:24px;height:24px;}
   .card__head [data-nodrag]{padding:4px;margin:-4px;}}
-.card__wbadge{display:none;font-size:10px;font-weight:700;color:#fff;background:var(--w);padding:2px 8px;border-radius:999px;white-space:nowrap;flex:0 0 auto;align-self:center;letter-spacing:.01em;margin-top:1px;}
+.card__wbadge{display:inline-flex;font-size:10px;font-weight:700;color:#fff;background:var(--w);padding:2px 8px;border-radius:999px;white-space:nowrap;flex:0 0 auto;align-self:center;letter-spacing:.01em;margin-top:1px;}
 /* extra weight: solid rail, same as others */
 .card__in{flex:1;min-width:0;padding:var(--cardpad);display:flex;flex-direction:column;gap:8px;}
 .card__head{display:flex;align-items:flex-start;gap:11px;}
 .card__name{flex:1;min-width:0;font-size:14.5px;font-weight:600;line-height:1.35;margin:0;color:var(--text);}
-.card__notes{font-size:11px;color:var(--text-faint);line-height:1.45;margin:0;padding-left:28px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card__notes{font-size:12px;color:var(--text-faint);line-height:1.45;margin:0;padding-left:28px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .card__subs{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--text-dim);margin-left:28px;margin-top:8px;padding:5px 11px 5px 8px;background:var(--surface-2);border:1.5px solid var(--border);border-radius:999px;cursor:pointer;font-family:inherit;text-align:left;transition:background .14s,border-color .14s,color .14s;}
 .card__pending{display:flex;align-items:center;gap:5px;margin:8px 0 0 28px;font-size:11px;font-weight:600;color:var(--accent);}
 .card__subs:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface-3);}
@@ -272,8 +272,8 @@ input,textarea{font-family:inherit;}
 .subdel-panel__sub{font-size:13px;color:var(--text-dim);margin:0 0 18px;line-height:1.5;}
 .subdel-panel__name{font-weight:600;color:var(--text);}
 .subdel-panel__btns{display:flex;gap:8px;justify-content:center;}
-.check{position:relative;width:19px;height:19px;flex-shrink:0;margin-top:1px;border-radius:50%;border:1.5px solid var(--border-strong);background:transparent;display:grid;place-items:center;cursor:pointer;padding:0;overflow:hidden;transition:background .14s,border-color .14s;}
-.check__half{position:absolute;inset:0;opacity:0;background:linear-gradient(90deg,var(--w) 50%,transparent 50%);transition:opacity .14s;}
+.check{position:relative;width:19px;height:19px;flex-shrink:0;margin-top:1px;border-radius:50%;border:1.5px solid var(--border-strong);background:transparent;display:grid;place-items:center;cursor:pointer;padding:0;overflow:visible;transition:background .14s,border-color .14s;}
+.check__half{position:absolute;inset:0;border-radius:50%;opacity:0;background:linear-gradient(90deg,var(--w) 50%,transparent 50%);transition:opacity .14s;}
 .check__tick{position:relative;color:#fff;opacity:0;display:grid;transform:scale(.8);transition:opacity .14s,transform .14s;}
 .check:hover{border-color:var(--w);}
 .check[data-stage="doing"]{border-color:var(--w);}
@@ -392,7 +392,7 @@ input,textarea{font-family:inherit;}
 
 /* form elements */
 .field{display:flex;flex-direction:column;gap:5px;}
-.field__lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);}
+.field__lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);}
 .field__hint{font-size:11px;color:var(--text-faint);}
 .field-row{display:flex;gap:10px;}
 .field-row .field{flex:1;}
@@ -708,6 +708,166 @@ button.setrow:hover{background:var(--surface-2);}
 .confetti-piece{position:fixed;z-index:9999;border-radius:1px;pointer-events:none;will-change:transform,opacity;animation:confettiPop .8s cubic-bezier(.18,.7,.4,1) forwards;}
 @keyframes confettiPop{0%{transform:translate(-50%,-50%) rotate(0deg) scale(1);opacity:1;}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(.55);opacity:0;}}
 @media(prefers-reduced-motion:reduce){.confetti-piece{display:none;}}
+
+/* ============================================================
+   HEFT V2 — LIQUID GLASS LAYER
+   Reskins the app with gaussian-blur glass surfaces over an
+   ambient gradient mesh. Layout rules above stay untouched;
+   this layer only overrides visual properties + adds v2 pieces.
+   ============================================================ */
+
+/* -- glass tokens -- */
+[data-theme="light"]{
+  --glass:rgba(255,253,248,0.62);
+  --glass-strong:rgba(255,253,248,0.78);
+  --glass-soft:rgba(255,253,248,0.42);
+  --glass-border:rgba(255,255,255,0.65);
+  --glass-edge:rgba(120,95,70,0.14);
+  --glass-shadow:0 18px 44px -18px rgba(80,60,40,0.28),0 2px 8px -2px rgba(80,60,40,0.08);
+  --mesh-1:oklch(0.93 0.03 70);--mesh-2:oklch(0.92 0.035 150);--mesh-3:oklch(0.93 0.03 264);--mesh-base:oklch(0.955 0.012 80);
+}
+[data-theme="dark"]{
+  --glass:rgba(34,30,26,0.55);
+  --glass-strong:rgba(38,34,29,0.74);
+  --glass-soft:rgba(34,30,26,0.36);
+  --glass-border:rgba(255,255,255,0.10);
+  --glass-edge:rgba(255,255,255,0.13);
+  --glass-shadow:0 20px 48px -18px rgba(0,0,0,0.55),0 2px 8px -2px rgba(0,0,0,0.3);
+  --mesh-1:oklch(0.29 0.055 62);--mesh-2:oklch(0.26 0.05 150);--mesh-3:oklch(0.27 0.055 264);--mesh-base:oklch(0.165 0.01 60);
+}
+
+/* -- ambient mesh background (the thing the glass blurs) -- */
+html,body{background:oklch(0.955 0.012 80);}
+html[data-dark="true"],html[data-dark="true"] body{background:oklch(0.17 0.008 60);}
+#app{background:
+  radial-gradient(1100px 720px at 12% -8%,var(--mesh-1) 0%,transparent 58%),
+  radial-gradient(900px 640px at 105% 12%,var(--mesh-3) 0%,transparent 55%),
+  radial-gradient(1000px 800px at 50% 115%,var(--mesh-2) 0%,transparent 60%),
+  var(--mesh-base);}
+#root{background:transparent;}
+.appmain,.board{background:transparent;}
+
+/* -- top bars: floating glass -- */
+.apptop,.apptop--desk,.datebar,.apptop.mobile-only{background:var(--glass);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);border-bottom:1px solid var(--glass-border);box-shadow:0 1px 0 var(--glass-edge);}
+@media(max-width:479px){.apptop.mobile-only{background:var(--glass);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);}}
+.datenav__arrow,.datebar__arrow,.datebar__panel,.apptop__gear,.sidebar__toggle,.sidebar__sync{background:var(--glass-soft);border-color:var(--glass-edge);border-radius:11px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .18s,border-color .18s,transform .18s cubic-bezier(.34,1.56,.64,1);}
+.datenav__arrow:hover,.datebar__arrow:hover,.apptop__gear:hover{transform:scale(1.06);background:var(--glass);}
+.datenav__arrow:active,.datebar__arrow:active{transform:scale(.94);}
+.apptop__viewtoggle{background:var(--glass-soft);border-color:var(--glass-edge);border-radius:11px;}
+.viewtoggle__opt[data-on="true"]{background:var(--glass-strong);box-shadow:0 2px 8px -2px rgba(0,0,0,.14);border-radius:9px;}
+
+/* -- sidebar: frosted panel -- */
+.sidebar{background:var(--glass-soft);backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);border-right:1px solid var(--glass-border);}
+@media(max-width:479px){.sidebar{background:var(--glass-strong);}}
+.sidesearch__input{background:var(--glass-soft);border-color:var(--glass-edge);border-radius:12px;transition:border-color .18s,background .18s,box-shadow .18s;}
+.sidesearch__input:focus{background:var(--glass-strong);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);}
+.chip,.tagchip,.swatch{background:var(--glass-soft);border-color:var(--glass-edge);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .16s,border-color .16s,transform .16s;}
+.chip:hover,.tagchip:hover{transform:translateY(-1px);}
+
+/* -- kanban columns: deep glass wells -- */
+.col{background:var(--glass-soft);border:1px solid var(--glass-border);border-radius:22px;backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:inset 0 1px 0 var(--glass-border),0 8px 28px -16px rgba(0,0,0,.18);}
+.col[data-over="true"]{background:color-mix(in srgb,var(--accent) 10%,var(--glass-soft));box-shadow:inset 0 0 0 1.5px var(--accent),0 8px 28px -12px color-mix(in srgb,var(--accent) 40%,transparent);}
+.lane{background:var(--glass-soft);border:1px solid var(--glass-border);border-radius:22px;backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);}
+.col__count{background:var(--glass);border:1px solid var(--glass-edge);}
+
+/* -- cards: raised glass chips -- */
+.card{background:var(--glass-strong);border:1px solid var(--glass-border);border-radius:17px;box-shadow:0 2px 10px -4px rgba(0,0,0,.10),inset 0 1px 0 var(--glass-border);transition:border-color .18s ease,box-shadow .25s ease,transform .3s cubic-bezier(.34,1.45,.64,1),opacity .35s ease;}
+.card:hover{border-color:var(--glass-border);box-shadow:var(--glass-shadow);transform:scale(1.02) translateY(-2px);}
+.card__rail{width:4px;border-radius:99px;margin:8px 0 8px 6px;background:linear-gradient(180deg,var(--w),color-mix(in srgb,var(--w) 55%,transparent));}
+.subcard{background:color-mix(in srgb,var(--w,var(--border)) 8%,var(--glass));border:1px solid color-mix(in srgb,var(--w,var(--border)) 22%,var(--glass-border));border-radius:14px;}
+.card__subs{background:var(--glass-soft);border-color:var(--glass-edge);}
+
+/* completion: card settles — gentle exhale, then rests at reduced presence */
+@keyframes cardSettle{0%{transform:scale(1);}30%{transform:scale(1.035);}100%{transform:scale(1);}}
+.card[data-done="true"]{opacity:.6;animation:cardSettle .55s cubic-bezier(.34,1.3,.5,1);}
+@media(prefers-reduced-motion:reduce){.card[data-done="true"]{animation:none;}}
+
+/* checkbox: springy pop + ripple ring on completion */
+.check{transition:background .16s,border-color .16s,transform .2s cubic-bezier(.34,1.8,.5,1);}
+.check:hover{transform:scale(1.12);}
+.check:active{transform:scale(.9);}
+@keyframes checkPop{0%{transform:scale(.6);}55%{transform:scale(1.25);}100%{transform:scale(1);}}
+.check[data-stage="done"]{animation:checkPop .38s cubic-bezier(.34,1.6,.5,1);}
+@keyframes checkRing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--w) 55%,transparent);}100%{box-shadow:0 0 0 12px transparent;}}
+.check[data-stage="done"]::after{content:'';position:absolute;inset:-2px;border-radius:50%;animation:checkRing .6s ease-out;}
+.check__tick{transition:opacity .18s,transform .3s cubic-bezier(.34,1.8,.5,1);}
+.habit__daydot{transition:background .16s,border-color .16s,box-shadow .16s,transform .22s cubic-bezier(.34,1.8,.5,1);}
+.habit__day[data-done="true"] .habit__daydot{animation:checkPop .38s cubic-bezier(.34,1.6,.5,1);}
+@media(prefers-reduced-motion:reduce){.check[data-stage="done"],.habit__day[data-done="true"] .habit__daydot{animation:none;}}
+
+/* completion glow + day-complete veil */
+
+/* -- day progress ring -- */
+.dayring{position:relative;display:inline-flex;align-items:center;gap:5px;margin-left:6px;}
+.dayring svg{display:block;}
+.dayring__lbl{font-size:10.5px;font-weight:700;color:var(--text-dim);letter-spacing:.01em;white-space:nowrap;}
+.dayring[data-complete="true"] .dayring__lbl{color:var(--w-light);}
+@keyframes ringDone{0%{transform:scale(1);}45%{transform:scale(1.22);}100%{transform:scale(1);}}
+.dayring[data-complete="true"] svg{animation:ringDone .5s cubic-bezier(.34,1.6,.5,1);}
+
+/* -- fab + pills: glass with lift -- */
+.fab{box-shadow:0 16px 36px -10px color-mix(in srgb,var(--accent) 65%,transparent),0 4px 10px -3px rgba(0,0,0,.2);transition:transform .2s cubic-bezier(.34,1.56,.64,1),filter .15s;}
+.fab:hover{transform:translateY(-2px) scale(1.03);}
+.fab:active{transform:scale(.96);}
+.movepill{background:var(--glass-strong);border:1px solid var(--glass-border);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);transition:transform .2s cubic-bezier(.34,1.56,.64,1),border-color .15s;}
+.movepill:hover{transform:translateY(-2px);}
+.syncpill,.toast{background:var(--glass-strong);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border:1px solid var(--glass-border);color:var(--text);box-shadow:var(--glass-shadow);}
+.toast{color:var(--text);}
+.toast__action{border-left-color:var(--glass-edge);}
+.zoomctl{background:var(--glass-strong);border-color:var(--glass-border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+
+/* -- modals & menus: heavy frosted glass -- */
+.modal-scrim{background:color-mix(in srgb,var(--overlay) 75%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.modal__panel,.tplpop,.savetpl__panel,.subdel-panel,.crop-shell{background:var(--glass-strong);backdrop-filter:blur(34px) saturate(1.6);-webkit-backdrop-filter:blur(34px) saturate(1.6);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);}
+.modal__panel{border-radius:24px 24px 0 0;}
+@media(min-width:600px){.modal__panel{border-radius:22px;}}
+.popmenu,.colsort__menu,.datepick__pop{background:var(--glass-strong);backdrop-filter:blur(26px) saturate(1.6);-webkit-backdrop-filter:blur(26px) saturate(1.6);border:1px solid var(--glass-border);border-radius:14px;box-shadow:var(--glass-shadow);}
+.input{background:var(--glass-soft);border-color:var(--glass-edge);border-radius:11px;transition:border-color .16s,box-shadow .16s,background .16s;}
+.input:focus{background:var(--glass-strong);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);}
+.seg,.rollopts,.setgroup{background:var(--glass-soft);border-color:var(--glass-edge);}
+.seg__opt[data-on="true"]{background:var(--glass-strong);box-shadow:0 2px 8px -2px rgba(0,0,0,.14);}
+.tplrow:hover{background:var(--glass-strong);}
+.tpl__chk{background:var(--glass-soft);}
+.rollbanner{background:color-mix(in srgb,var(--accent) 7%,var(--glass-strong));backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-radius:16px;}
+.card-drag-ghost{background:var(--glass-strong);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:14px;}
+
+/* modal entrance: soft spring */
+@keyframes modalup{from{opacity:0;transform:translateY(22px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal__panel{animation:modalup .34s cubic-bezier(.22,1.2,.36,1);}
+
+/* -- onboarding -- */
+.onboard-scrim{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:20px;background:color-mix(in srgb,var(--overlay) 60%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);animation:scrimin .3s ease;}
+.onboard{width:100%;max-width:430px;background:var(--glass-strong);backdrop-filter:blur(36px) saturate(1.6);-webkit-backdrop-filter:blur(36px) saturate(1.6);border:1px solid var(--glass-border);border-radius:26px;box-shadow:var(--glass-shadow);padding:30px 28px 26px;display:flex;flex-direction:column;gap:18px;animation:modalup .4s cubic-bezier(.22,1.2,.36,1);}
+.onboard__dots{display:flex;gap:6px;justify-content:center;}
+.onboard__dot{width:22px;height:4px;border-radius:99px;background:var(--surface-3);transition:background .3s;}
+.onboard__dot[data-on="true"]{background:var(--accent);}
+.onboard__step{display:flex;flex-direction:column;gap:14px;animation:stepIn .35s cubic-bezier(.22,1,.36,1);}
+@keyframes stepIn{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:none;}}
+.onboard__mark{align-self:center;color:var(--w-light);margin:4px 0 2px;}
+.onboard__title{font-family:var(--font-display);font-size:23px;font-weight:700;letter-spacing:-.02em;color:var(--text);margin:0;text-align:center;line-height:1.2;}
+.onboard__sub{font-size:14px;color:var(--text-dim);line-height:1.6;margin:0;text-align:center;}
+.onboard__sub strong{color:var(--text);}
+.onboard__input{font-size:15px;padding:13px 14px;}
+.onboard__weights{display:flex;flex-direction:column;gap:6px;}
+.onboard__habitrow{display:flex;align-items:center;gap:9px;}
+.onboard__actions{display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:4px;}
+.onboard__cta{width:100%;justify-content:center;font-size:14.5px;padding:13px 18px;border-radius:14px;}
+.onboard__skip{background:transparent;border:0;color:var(--text-faint);font-size:12.5px;font-weight:600;cursor:pointer;padding:6px 10px;font-family:inherit;}
+.onboard__skip:hover{color:var(--text-dim);}
+
+/* -- v2.1 research-pass fixes -- */
+/* status pill is informational; never steal taps, never cover the FAB */
+.syncpill{pointer-events:none;}
+@media(max-width:479px){.syncpill{bottom:calc(84px + env(safe-area-inset-bottom,8px));}}
+/* tag chip on cards — client/context visible without opening the task */
+.card__tag{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;margin-left:28px;margin-top:2px;font-size:10.5px;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:999px;padding:2px 9px;letter-spacing:.02em;}
+/* blanket reduced-motion: structural motion off, not just celebrations */
+@media(prefers-reduced-motion:reduce){
+  .modal__panel,.onboard,.onboard__step,.toast,.syncpill,.rollbanner,.tplpop,.savetpl__panel{animation:none!important;}
+  .check[data-stage="done"],.check[data-stage="done"]::after,.habit__day[data-done="true"] .habit__daydot,.dayring[data-complete="true"] svg{animation:none!important;}
+  .card,.card:hover,.check,.check:hover,.fab,.fab:hover,.movepill,.chip,.tagchip,.datenav__arrow,.datebar__arrow,.apptop__gear{transition:none!important;transform:none!important;}
+  .splash-bar{animation:none!important;}
+}
 </style>
 </head>
 <body>
@@ -723,6 +883,14 @@ const { useState, useEffect, useRef, useMemo, useCallback } = React;
 const SUPABASE_URL = 'https://ezmqnbfpnulsgcemmiia.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_-Jge59fyEZPiDTcjVWLygw_mW0y9WbE';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ===== SANDBOX MODE =====
+// ?sandbox=1 → isolated test environment: separate localStorage key, no auth,
+// no Supabase reads/writes. Real user data is never touched.
+const SANDBOX=new URLSearchParams(location.search).has('sandbox');
+const LS_KEY=SANDBOX?'heft.sandbox.v1':'heft.v1';
+const LS_ONBOARD_KEY=SANDBOX?'heft.sandbox.onboarded':'heft.onboarded';
+let CELEBRATE='full'; // 'full' | 'subtle' | 'off' — set from App settings
 
 // ===== CONSTANTS =====
 const STAGES=['todo','doing','done'];
@@ -744,10 +912,12 @@ const HABIT_ICONS=['book','dumbbell','droplet','heart','pen','note','sun','moon'
 let _seq=100; function uid(){return 'i'+Date.now().toString(36)+(++_seq).toString(36)+Math.random().toString(36).slice(2,6);}
 
 // ===== CONFETTI =====
-function fireConfetti(x,y){
+function fireConfetti(x,y,intensity=1){
   if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  const colors=['#7FB069','#E6B450','#D9744F','#9B8FB0','#5C3D2E'];
-  const N=16;
+  if(CELEBRATE==='off')return;
+  const isDark=document.documentElement.getAttribute('data-dark')==='true';
+  const colors=isDark?['#8FBF7F','#D9B36A','#CE8A6A','#A79BC0','#B99C82']:['#7FB069','#E6B450','#D9744F','#9B8FB0','#5C3D2E'];
+  const N=CELEBRATE==='subtle'?0:Math.round(16*intensity);
   for(let i=0;i<N;i++){
     const p=document.createElement('div');
     p.className='confetti-piece';
@@ -756,15 +926,25 @@ function fireConfetti(x,y){
     p.style.left=x+'px';p.style.top=y+'px';
     p.style.background=colors[i%colors.length];
     const angle=(Math.PI*2*i)/N+(Math.random()-0.5)*0.5;
-    const dist=34+Math.random()*46;
+    const dist=(34+Math.random()*46)*Math.sqrt(intensity);
     const dx=Math.cos(angle)*dist;
-    const dy=Math.sin(angle)*dist-(26+Math.random()*22);
+    const dy=Math.sin(angle)*dist-(26+Math.random()*22)*intensity;
     p.style.setProperty('--dx',dx.toFixed(1)+'px');
     p.style.setProperty('--dy',dy.toFixed(1)+'px');
     p.style.setProperty('--rot',(Math.random()*640-320).toFixed(0)+'deg');
     document.body.appendChild(p);
     p.addEventListener('animationend',()=>p.remove());
   }
+  if(CELEBRATE==='full'&&navigator.vibrate)navigator.vibrate(intensity>1?[10,40,18]:10);
+}
+
+// Full-day celebration: center burst, no full-screen wash.
+// Fired once when the last task of the focused day is completed.
+function fireDayComplete(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  if(CELEBRATE==='off')return;
+  if(CELEBRATE==='subtle'){fireConfetti(window.innerWidth/2,window.innerHeight*0.38,1);return;}
+  fireConfetti(window.innerWidth/2,window.innerHeight*0.38,2.4);
 }
 
 // ===== HELPERS =====
@@ -869,8 +1049,8 @@ function MiniCalendar({focusDate,setFocusDate,taskDays}){
       <div className="minical__head">
         <span className="minical__month">{FULL_MONTHS[view.m]} {view.y}</span>
         <div className="minical__nav">
-          <button className="minical__arrow" onClick={()=>shiftMonth(-1)}><Icon name="chevL" size={13}/></button>
-          <button className="minical__arrow" onClick={()=>shiftMonth(1)}><Icon name="chevron" size={13}/></button>
+          <button className="minical__arrow" aria-label="Previous month" onClick={()=>shiftMonth(-1)}><Icon name="chevL" size={13}/></button>
+          <button className="minical__arrow" aria-label="Next month" onClick={()=>shiftMonth(1)}><Icon name="chevron" size={13}/></button>
         </div>
       </div>
       <div className="minical__grid">{WEEKDAYS.map((d,i)=><span key={i} className="minical__dowcell">{d[0]}</span>)}</div>
@@ -911,7 +1091,7 @@ function HabitManager({habits,onAdd,onRemove,onEdit,onClose}){
   function importIcon(e){const file=e.target.files&&e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=(ev)=>{const url=ev.target.result;setCustomIcons(arr=>arr.includes(url)?arr:[...arr,url]);if(importTarget.current==='new')setDraftIcon(url);else if(importTarget.current!=null)onEdit(importTarget.current,{icon:url});};reader.readAsDataURL(file);e.target.value='';}
   return(
     <div className="modal-scrim" onMouseDown={onClose}>
-      <div className="modal__panel" onMouseDown={(e)=>e.stopPropagation()}>
+      <div className="modal__panel" role="dialog" aria-modal="true" onMouseDown={(e)=>e.stopPropagation()}>
         <div className="modal__bar"><span className="modal__title">Habits</span><button className="iconbtn" onClick={onClose}><Icon name="x" size={18}/></button></div>
         <div className="modal__body">
           <div className="hmgr__list">
@@ -976,7 +1156,7 @@ function ArchiveModal({taskArchive,habitArchive,onRecoverTask,onDeleteTask,onRec
   })();
   return(
     <div className="modal-scrim" onMouseDown={onClose}>
-      <div className="modal__panel" onMouseDown={(e)=>e.stopPropagation()}>
+      <div className="modal__panel" role="dialog" aria-modal="true" onMouseDown={(e)=>e.stopPropagation()}>
         <div className="modal__bar"><span className="modal__title">Archive</span><button className="iconbtn" onClick={onClose}><Icon name="x" size={18}/></button></div>
         <div className="modal__body">
           {empty&&<p className="hmgr__empty">Nothing archived yet. Deleted tasks and habits land here and can be recovered.</p>}
@@ -1014,6 +1194,13 @@ function ArchiveModal({taskArchive,habitArchive,onRecoverTask,onDeleteTask,onRec
     </div>
   );
 }
+// True consecutive-day streak ending today (or yesterday if today unchecked yet).
+function habitStreak(set){
+  let n=0;let d=todayDate();
+  if(!set.has(dayKey(d)))d=shiftDay(d,-1);
+  while(set.has(dayKey(d))){n++;d=shiftDay(d,-1);}
+  return n;
+}
 function HabitTracker({habits,focusDate,habitLog,toggleHabit,onManageHabits}){
   const week=weekDays(focusDate);const todayKey=dayKey(todayDate());const selKey=dayKey(focusDate);
   return(
@@ -1021,15 +1208,15 @@ function HabitTracker({habits,focusDate,habitLog,toggleHabit,onManageHabits}){
       <div className="habits">
         {habits.length===0&&<button className="habits__empty" onClick={onManageHabits}><Icon name="plus" size={13}/>Add your first habit</button>}
         {habits.map(h=>{
-          const set=new Set(habitLog[h.id]||[]);const weekDone=week.reduce((n,d)=>n+(set.has(dayKey(d))?1:0),0);
+          const set=new Set(habitLog[h.id]||[]);const streak=habitStreak(set);
           return(
             <div className="habit" key={h.id}>
               <div className="habit__top">
                 <span className="habit__name"><HabitIcon icon={h.icon} size={14}/>{h.name}</span>
-                <span className="habit__streak" data-active={weekDone>0?'true':'false'}>{weekDone>0?(<React.Fragment><span className="habit__streaknum">{weekDone}</span><span className="habit__streaklbl">day{weekDone===1?'':'s'}</span></React.Fragment>):(<span className="habit__streaklbl habit__streaklbl--start">Start today</span>)}</span>
+                <span className="habit__streak" data-active={streak>0?'true':'false'}>{streak>0?(<React.Fragment><span className="habit__streaknum">{streak}</span><span className="habit__streaklbl">day{streak===1?'':' streak'}</span></React.Fragment>):(<span className="habit__streaklbl habit__streaklbl--start">Start today</span>)}</span>
               </div>
               <div className="habit__week">
-                {week.map(d=>{const k=dayKey(d);const future=k>todayKey;return<button key={k} className="habit__day" data-done={set.has(k)?'true':'false'} data-sel={k===selKey?'true':'false'} data-future={future?'true':'false'} disabled={future} onClick={(e)=>{const willComplete=!set.has(k);if(willComplete&&k===todayKey){const dot=e.currentTarget.querySelector('.habit__daydot');const r=(dot||e.currentTarget).getBoundingClientRect();fireConfetti(r.left+r.width/2,r.top+r.height/2);}toggleHabit(h.id,k);}}><span className="habit__daylbl">{WEEKDAYS[d.getDay()][0]}</span><span className="habit__daydot"><Icon name="check" size={9}/></span></button>;})}
+                {week.map(d=>{const k=dayKey(d);const future=k>todayKey;return<button key={k} className="habit__day" aria-label={h.name+', '+d.toLocaleDateString(undefined,{weekday:'long'})+(set.has(k)?' — done':' — not done')} data-done={set.has(k)?'true':'false'} data-sel={k===selKey?'true':'false'} data-future={future?'true':'false'} disabled={future} onClick={(e)=>{const willComplete=!set.has(k);if(willComplete&&k===todayKey){const dot=e.currentTarget.querySelector('.habit__daydot');const r=(dot||e.currentTarget).getBoundingClientRect();fireConfetti(r.left+r.width/2,r.top+r.height/2);}toggleHabit(h.id,k);}}><span className="habit__daylbl">{WEEKDAYS[d.getDay()][0]}</span><span className="habit__daydot"><Icon name="check" size={9}/></span></button>;})}
               </div>
             </div>
           );
@@ -1071,7 +1258,7 @@ function relTime(ts,now){
 // ===== FILTER SIDEBAR =====
 function FilterSidebar({open,onToggle,activeWeights,toggleWeight,activeTag,setTag,tags,focusDate,setFocusDate,tasks,habits,habitLog,toggleHabit,onManageHabits,onManageTags,query,setQuery,width,resizing,onSync,syncing,saveError}){
   const activeCount=activeWeights.length+(activeTag===null?0:1);
-  const taskDays=useMemo(()=>{const s=new Set();tasks.forEach(t=>{if(t.day)s.add(t.day);});return s;},[tasks]);
+  const taskDays=useMemo(()=>{const s=new Set();tasks.forEach(t=>{if(t.date)s.add(t.date);});return s;},[tasks]);
   return(
     <aside className="sidebar" data-open={open?'true':'false'} style={open&&width?{width:width+'px',transition:resizing?'none':undefined}:undefined}>
       <div className="sidebar__head">
@@ -1122,10 +1309,10 @@ function Checkbox({stage,completed,onCycle,weight}){
   // 3-state status control: todo (empty) -> doing (half) -> complete (check) -> todo.
   // "completed" shows the check even while the task waits in its column for subtasks.
   const vstate=(completed||stage==='done')?'done':stage;
-  const label=vstate==='done'?'Reset to to-do':vstate==='todo'?'Mark in progress':'Mark complete';
+  const label=vstate==='done'?'Mark as not done':vstate==='todo'?'Mark in progress':'Mark complete';
   return(
     <button className="check" data-stage={vstate} style={{'--w':`var(--w-${weight||'medium'})`}}
-      onClick={(e)=>{e.stopPropagation();onCycle();}}
+      onClick={(e)=>{e.stopPropagation();onCycle(e);}}
       title={label}
       aria-label={label}>
       <span className="check__half" aria-hidden="true"/>
@@ -1143,9 +1330,11 @@ function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubTog
   return(<React.Fragment>
     <div className="taskgroup">
       <article className="card" data-weight={weight} data-done={done?'true':'false'}
+        tabIndex={0} role="button" aria-label={task.name+' — '+(weight!=='none'?weight+' weight, ':'')+(done?'done':STAGE_LABELS[task.stage]||task.stage)}
         style={{'--w':`var(--w-${weight})`,'touchAction':draggable?'pan-y':'auto'}}
         onPointerDown={onPointerDown}
-        onClick={()=>onOpen&&onOpen(task)}>
+        onKeyDown={(e)=>{if((e.key==='Enter'||e.key===' ')&&e.target===e.currentTarget){e.preventDefault();onOpen&&onOpen(task);}}}
+        onClick={()=>{if(Date.now()-(window.__heftDragEnd||0)<350)return;onOpen&&onOpen(task);}}>
         <span className="card__rail" aria-hidden="true"/>
         <div className="card__in">
           <header className="card__head">
@@ -1155,6 +1344,7 @@ function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubTog
             <span className="card__grip" aria-hidden="true"><Icon name="grip" size={18}/></span>
           </header>
           {task.notes&&<p className="card__notes">{task.notes}</p>}
+          {task.tag&&<span className="card__tag">{task.tag}</span>}
           {(task.subtasks||[]).length>0&&(<button type="button" className="card__subs" data-expanded={expanded?'true':'false'} data-nodrag="true" style={{'--w':`var(--w-${weight})`}} onClick={(e)=>{e.stopPropagation();setExpanded(o=>!o);}}><span style={{display:'inline-flex',transition:'transform .15s',transform:expanded?'rotate(90deg)':'rotate(0deg)'}}><Icon name="chevron" size={12}/></span><Icon name="subtasks" size={13}/><span>{(task.subtasks||[]).filter(s=>s.done).length}/{(task.subtasks||[]).length} subtask{(task.subtasks||[]).length!==1?'s':''}</span></button>)}
           {pendingSubs&&<p className="card__pending"><Icon name="checkcircle" size={12}/>Completed — moves to Done when subtasks finish</p>}
         </div>
@@ -1170,7 +1360,7 @@ function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubTog
                 style={{'--w':`var(--w-${weight})`}}
                 onDragStart={(e)=>{e.stopPropagation();e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','sub');setSubDrag(i);}}
                 onDragEnd={()=>{setSubDrag(null);setSubOver(null);}}>
-                <button type="button" className="subcard__check" data-done={s.done?'true':'false'} onClick={(e)=>{e.stopPropagation();onSubToggle&&onSubToggle(s.id);}}>{s.done&&<Icon name="check" size={11}/>}</button>
+                <button type="button" className="subcard__check" aria-label={(s.done?'Uncheck subtask: ':'Complete subtask: ')+s.name} data-done={s.done?'true':'false'} onClick={(e)=>{e.stopPropagation();onSubToggle&&onSubToggle(s.id,e);}}>{s.done&&<Icon name="check" size={11}/>}</button>
                 <span className="subcard__name">{s.name}</span>
                 <button type="button" className="subcard__trash" title="Delete subtask" onClick={(e)=>{e.stopPropagation();setPendingDelete(s);}}>
                   <Icon name="trash" size={14}/>
@@ -1309,12 +1499,16 @@ function usePointerDrag(setTasks,setDragId){
       if(ghostRef.current){ghostRef.current.remove();ghostRef.current=null;}
       document.querySelectorAll('[data-stage]').forEach(c=>c.setAttribute('data-over','false'));
       if(s&&s.started){
+        window.__heftDragEnd=Date.now();
         let ns=s.lastCol;
         if(!ns){const col=highlight(ev.clientX,ev.clientY);if(col)ns=col.dataset.stage;}
         document.querySelectorAll('[data-stage]').forEach(c=>c.setAttribute('data-over','false'));
         // Dropping into Done follows the same subtask rule as the checkbox:
         // mark complete, but stay parked (in progress) until every subtask is done.
-        if(ns){setTasks(ts=>ts.map(t=>{if(t.id!==s.id)return t;if(ns==='done'){const subs=t.subtasks||[];const allDone=subs.length===0||subs.every(x=>x.done);return{...t,completed:true,stage:allDone?'done':'doing'};}return{...t,stage:ns,completed:false};}));}
+        if(ns){
+          if(ns==='done')fireConfetti(ev.clientX,ev.clientY,1);
+          setTasks(ts=>ts.map(t=>{if(t.id!==s.id)return t;if(ns==='done'){const subs=t.subtasks||[];const allDone=subs.length===0||subs.every(x=>x.done);return{...t,completed:true,stage:allDone?'done':'doing'};}return{...t,stage:ns,completed:false};}));
+        }
         setDragId(null);
       }
     }
@@ -1357,12 +1551,12 @@ function Column({stage,tasks,setTasks,dragId,setDragId,sort,setSort,onOpenTask,o
           )
         ):list.map(t=>(
           <TaskCard key={t.id} task={t}
-            onCycle={()=>onCycle(t.id)}
+            onCycle={(e)=>onCycle(t.id,e)}
             onOpen={onOpenTask}
             defaultExpanded={defaultExpanded}
             draggable={true}
             onPointerDown={onPD?(e)=>onPD(e,t):undefined}
-            onSubToggle={(subId)=>setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const subs=(x.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);let stage=x.stage;if(x.completed)stage=(subs.length>0&&subs.every(s=>s.done))?'done':'doing';return{...x,subtasks:subs,stage};}))}
+            onSubToggle={(subId,e)=>{const cur=tasks.find(v=>v.id===t.id);if(cur&&cur.completed&&cur.stage!=='done'&&e){const after=(cur.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);if(after.length>0&&after.every(s=>s.done)){const r=e.currentTarget.getBoundingClientRect();fireConfetti(r.left+r.width/2,r.top+r.height/2,1.2);}}setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const subs=(x.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);let stage=x.stage;if(x.completed)stage=(subs.length>0&&subs.every(s=>s.done))?'done':'doing';return{...x,subtasks:subs,stage};}));}}
             onSubReorder={(from,to)=>setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const arr=(x.subtasks||[]).slice();if(to<0||to>=arr.length||from===to)return x;const[m]=arr.splice(from,1);arr.splice(to,0,m);return{...x,subtasks:arr};}))}
             onSubDelete={(subId)=>setTasks(ts=>ts.map(x=>x.id===t.id?{...x,subtasks:(x.subtasks||[]).filter(s=>s.id!==subId)}:x))}/>
         ))}
@@ -1403,10 +1597,10 @@ function Lane({weight,tasks,setTasks,onOpenTask,onCycle,defaultExpanded}){
       <div className="lane__body">
         {total===0?<div className="col__empty">No {WEIGHT_LABELS[weight].toLowerCase()} tasks</div>:list.map(t=>(
           <TaskCard key={t.id} task={t}
-            onCycle={()=>onCycle(t.id)}
+            onCycle={(e)=>onCycle(t.id,e)}
             onOpen={onOpenTask}
             defaultExpanded={defaultExpanded}
-            onSubToggle={(subId)=>setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const subs=(x.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);let stage=x.stage;if(x.completed)stage=(subs.length>0&&subs.every(s=>s.done))?'done':'doing';return{...x,subtasks:subs,stage};}))}
+            onSubToggle={(subId,e)=>{const cur=tasks.find(v=>v.id===t.id);if(cur&&cur.completed&&cur.stage!=='done'&&e){const after=(cur.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);if(after.length>0&&after.every(s=>s.done)){const r=e.currentTarget.getBoundingClientRect();fireConfetti(r.left+r.width/2,r.top+r.height/2,1.2);}}setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const subs=(x.subtasks||[]).map(s=>s.id===subId?{...s,done:!s.done}:s);let stage=x.stage;if(x.completed)stage=(subs.length>0&&subs.every(s=>s.done))?'done':'doing';return{...x,subtasks:subs,stage};}));}}
             onSubReorder={(from,to)=>setTasks(ts=>ts.map(x=>{if(x.id!==t.id)return x;const arr=(x.subtasks||[]).slice();if(to<0||to>=arr.length||from===to)return x;const[m]=arr.splice(from,1);arr.splice(to,0,m);return{...x,subtasks:arr};}))}
             onSubDelete={(subId)=>setTasks(ts=>ts.map(x=>x.id===t.id?{...x,subtasks:(x.subtasks||[]).filter(s=>s.id!==subId)}:x))}/>
         ))}
@@ -1444,13 +1638,13 @@ function TaskModal({initial,tags:initTags,onSave,onDelete,onClose,onDuplicate,on
   const [confirmTagDel,setConfirmTagDel]=useState(null);
   function dropTag(t){setTags(ls=>ls.filter(x=>x!==t));if(tag===t)setTag('');setConfirmTagDel(null);}
   function moveSub(from,to){setSubtasks(arr=>{if(to<0||to>=arr.length||from===to)return arr;const next=arr.slice();const[m]=next.splice(from,1);next.splice(to,0,m);return next;});}
-  function save(){const trimmed=name.trim();if(!trimmed)return;const completed=stage==='done';const allDone=subtasks.length===0||subtasks.every(s=>s.done);const finalStage=completed?(allDone?'done':'doing'):stage;if(onSave)onSave({id:initial?.id||uid(),seq:initial?.seq||Date.now(),date:date||todayKeyNow(),name:trimmed,weight,stage:finalStage,completed,tag,notes:notes.trim(),subtasks});}
+  function save(){const trimmed=name.trim();if(!trimmed)return;const completed=stage==='done';const allDone=subtasks.length===0||subtasks.every(s=>s.done);const finalStage=completed?(allDone?'done':'doing'):stage;if(onSave)onSave({id:initial?.id||uid(),seq:initial?.seq||Date.now(),date:date||todayKeyNow(),name:trimmed,weight,stage:finalStage,completed,tag,notes:notes.trim(),subtasks},tags);}
   const subDone=subtasks.filter(s=>s.done).length;
-  const hasDate=!!(initial&&initial.date);
+  const hasDate=editing&&!!(initial&&initial.date);
   const moveBase=new Date((initial?.date||date)+'T00:00:00');
   return(
     <div className="modal-scrim" onMouseDown={onClose}>
-      <div className="modal__panel modal__panel--task" onMouseDown={(e)=>e.stopPropagation()}>
+      <div className="modal__panel modal__panel--task" role="dialog" aria-modal="true" aria-label="Task editor" onMouseDown={(e)=>e.stopPropagation()}>
         <div className="modal__bar">
           <span className="modal__title">{editing?'Edit task':'New task'}</span>
           {hasDate&&(<>
@@ -1497,7 +1691,7 @@ function TaskModal({initial,tags:initTags,onSave,onDelete,onClose,onDuplicate,on
           </div>
           <div className="field-row">
             <div className="field" style={{position:'relative'}}>
-              <span className="field__lbl">Other date</span>
+              <span className="field__lbl">Date</span>
               <button type="button" className="pickbtn" onClick={()=>{setShowCal(o=>!o);setShowStage(false);}}><Icon name="cal" size={15}/><span>{new Date(date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}</span><span className="pickbtn__chev"><Icon name="chevDown" size={15}/></span></button>
               {showCal&&(<>
                 <div className="datepick__scrim" onMouseDown={(e)=>{e.stopPropagation();setShowCal(false);}}/>
@@ -1575,7 +1769,7 @@ function TagManager({tags,onAdd,onRemove,onRename,onClose}){
   function addNew(){const v=draft.trim();if(!v||tags.includes(v)){setDraft('');return;}onAdd(v);setDraft('');}
   return(
     <div className="modal-scrim" onMouseDown={onClose}>
-      <div className="modal__panel" onMouseDown={(e)=>e.stopPropagation()}>
+      <div className="modal__panel" role="dialog" aria-modal="true" onMouseDown={(e)=>e.stopPropagation()}>
         <div className="modal__bar"><span className="modal__title">Tags</span><button className="iconbtn" onClick={onClose}><Icon name="x" size={18}/></button></div>
         <div className="modal__body">
           <div className="hmgr__list">
@@ -1691,7 +1885,7 @@ function SaveTemplateDialog({taskData,onSave,onClose}){
 }
 
 // ===== SETTINGS MODAL =====
-function SetToggle({on,onChange}){return<button type="button" className="toggle" data-on={on?'true':'false'} onClick={()=>onChange(!on)}><span className="toggle__knob"/></button>;}
+function SetToggle({on,onChange}){return<button type="button" role="switch" aria-checked={on?'true':'false'} className="toggle" data-on={on?'true':'false'} onClick={()=>onChange(!on)}><span className="toggle__knob"/></button>;}
 function InlineSeg({value,options,onChange}){return<div className="seg seg--inline">{options.map(o=><button key={o.v} type="button" className="seg__opt" data-on={value===o.v?'true':'false'} onClick={()=>onChange(o.v)}>{o.label}</button>)}</div>;}
 function SetRow({icon,color,label,sub,control,chevron,danger,onClick}){
   const inner=(<React.Fragment><span className="setrow__ico" style={{'--c':color}}><Icon name={icon} size={15}/></span><span className="setrow__txt"><span className="setrow__label">{label}</span>{sub&&<span className="setrow__sub">{sub}</span>}</span>{control&&<span className="setrow__ctrl">{control}</span>}{chevron&&<span className="setrow__chev"><Icon name="chevron" size={16}/></span>}</React.Fragment>);
@@ -1789,7 +1983,10 @@ function CropModal({src,onConfirm,onCancel}){
   );
 }
 
-function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTypeface,accent,setAccent,zoom,setZoom,subExpandDefault,setSubExpandDefault,rollover,setRollover,templatesCount,onOpenTemplates,onSave,onPhotoSave,onClearTasks,clearScopeLabel,clearCount,onOpenArchive,archiveCount,onClose,onLogout}){
+function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTypeface,accent,setAccent,celebrate,setCelebrate,zoom,setZoom,subExpandDefault,setSubExpandDefault,rollover,setRollover,templatesCount,onOpenTemplates,onSave,onPhotoSave,onClearTasks,clearScopeLabel,clearCount,onOpenArchive,archiveCount,onClose,onLogout}){
+  // Appearance applies live for preview; Cancel restores what you walked in with.
+  const initialLook=useRef({dark,typeface,accent,celebrate});
+  function cancel(){const i=initialLook.current;setDark(i.dark);setTypeface(i.typeface);setAccent(i.accent);setCelebrate(i.celebrate);if(onClose)onClose();}
   const [confirmClear,setConfirmClear]=useState(false);
   const [tab,setTab]=useState('profile');
   const [first,setFirst]=useState(profile.first||'');const [last,setLast]=useState(profile.last||'');
@@ -1809,6 +2006,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
   }
   async function uploadCropped(dataUrl){
     setCropSrc(null);
+    if(SANDBOX){setPhoto(dataUrl);if(onPhotoSave)onPhotoSave(dataUrl);return;}
     setPhotoUploading(true);
     try{
       const res=await fetch(dataUrl);
@@ -1828,7 +2026,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
     <React.Fragment>
     {cropSrc&&<CropModal src={cropSrc} onConfirm={uploadCropped} onCancel={()=>setCropSrc(null)}/>}
     <div className="modal-scrim" onMouseDown={onClose}>
-      <div className="modal__panel modal__panel--settings" onMouseDown={(e)=>e.stopPropagation()}>
+      <div className="modal__panel modal__panel--settings" role="dialog" aria-modal="true" aria-label="Settings" onMouseDown={(e)=>e.stopPropagation()}>
         <div className="modal__bar"><span className="modal__title">Settings</span><button className="iconbtn" onClick={onClose}><Icon name="x" size={18}/></button></div>
         <div className="settabs">
           <button type="button" className="settabs__opt" data-on={tab==='profile'?'true':'false'} onClick={()=>setTab('profile')}>Profile</button>
@@ -1855,7 +2053,6 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
               <p className="plan-note">{plan==='Studio'?'Adds team members, shared boards, and client portals.':'For solo freelancers. Includes habits, weight system, and tags.'}</p>
             </div>
             <SetSection label="Account">
-              <SetRow icon="lock" color="var(--accent)" label="Change password" chevron onClick={()=>{}}/>
               <SetRow icon="x" color="var(--danger)" label="Log out" danger chevron onClick={onLogout}/>
             </SetSection>
           </div>
@@ -1879,9 +2076,15 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
                 <span className="field__lbl">Color scheme</span>
                 <div className="swatchrow">{ACCENT_KEYS.map(k=><button key={k} type="button" className="swatch" data-on={accent===k?'true':'false'} style={{'--sw':ACCENTS[k].swatch}} onClick={()=>setAccent(k)}><span className="swatch__dot"/><span>{k}</span></button>)}</div>
               </div>
+              <div className="field">
+                <span className="field__lbl">Celebrations</span>
+                <div className="seg">
+                  {[['full','Full'],['subtle','Subtle'],['off','Off']].map(([v,l])=><button key={v} type="button" className="seg__opt" data-on={celebrate===v?'true':'false'} onClick={()=>setCelebrate(v)}>{l}</button>)}
+                </div>
+                <span className="field__hint">{celebrate==='full'?'Confetti, glow and a day-complete moment.':celebrate==='subtle'?'Soft glow only — no confetti or vibration.':'No completion effects.'}</span>
+              </div>
             </div>
             <SetSection label="App behavior">
-              <SetRow icon="cal" color="var(--w-light)" label="Week starts on" control={<InlineSeg value={weekStart} onChange={setWeekStart} options={[{v:'sun',label:'Sun'},{v:'mon',label:'Mon'}]}/>}/>
               <SetRow icon="layout" color="var(--w-extra)" label="Default view" control={<InlineSeg value={view} onChange={setView} options={[{v:'kanban',label:'Kanban'},{v:'weight',label:'Weight'}]}/>}/>
               <SetRow icon="subtasks" color="var(--w-medium)" label="Subtasks open expanded" sub="Show subtasks without tapping" control={<SetToggle on={subExpandDefault} onChange={setSubExpandDefault}/>}/>
               <SetRow icon="plus" color="var(--accent)" label="Board zoom" control={
@@ -1912,8 +2115,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
               </div>
             </SetSection>
             <SetSection label="Data &amp; privacy">
-              <SetRow icon="download" color="var(--accent)" label="Export your data" sub="CSV" chevron onClick={()=>{}}/>
-              <SetRow icon="archive" color="var(--w-light)" label="Habit archive" sub={archiveCount>0?archiveCount+(archiveCount===1?' archived item':' archived items'):'Recover deleted tasks & habits'} chevron onClick={()=>onOpenArchive&&onOpenArchive()}/>
+              <SetRow icon="archive" color="var(--w-light)" label="Archive" sub={archiveCount>0?archiveCount+(archiveCount===1?' archived item':' archived items'):'Recover deleted tasks & habits'} chevron onClick={()=>onOpenArchive&&onOpenArchive()}/>
               <SetRow icon="trash" color="var(--w-heavy)" label="Delete tasks for this day" sub={clearScopeLabel||'Clears the selected day only'} danger chevron onClick={()=>setConfirmClear(true)}/>
               {confirmClear&&(
                 <div className="setconfirm-box">
@@ -1924,11 +2126,10 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
                   </div>
                 </div>
               )}
-              <SetRow icon="trash" color="var(--danger)" label="Delete account" danger chevron onClick={()=>{}}/>
             </SetSection>
           </div>
         )}
-        <div className="modal__foot"><span className="settings__version">Heft v{HEFT_VERSION}</span><div className="modal__actions"><button className="btn btn--ghost" onClick={onClose}>Cancel</button><button className="btn btn--primary" onClick={save}>Save</button></div></div>
+        <div className="modal__foot"><span className="settings__version">Heft v{HEFT_VERSION}</span><div className="modal__actions"><button className="btn btn--ghost" onClick={cancel}>Cancel</button><button className="btn btn--primary" onClick={save}>Save</button></div></div>
       </div>
     </div>
     </React.Fragment>
@@ -1936,7 +2137,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.15.1';
+const HEFT_VERSION='0.16.0-v2';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
@@ -1961,8 +2162,123 @@ const ROLLOVER_MODES=[
 const ROLLOVER_DEFAULT={mode:'newday',time:'18:00',auto:false};
 function nowPastTime(hhmm){if(!hhmm)return false;const parts=hhmm.split(':');const h=+parts[0],m=+parts[1];const n=new Date();return n.getHours()>h||(n.getHours()===h&&n.getMinutes()>=m);}
 
+// ===== DAY PROGRESS RING =====
+// Small always-visible progress ring for the focused day. Progress feedback is
+// the core loop: seeing the ring close is what makes the next check-off pull.
+function DayProgress({done,total}){
+  if(total===0)return null;
+  const R=9,C=2*Math.PI*R;
+  const pct=done/total;
+  const complete=done===total;
+  return(
+    <span className="dayring" data-complete={complete?'true':'false'} title={done+' of '+total+' done'}>
+      <svg width="26" height="26" viewBox="0 0 26 26">
+        <circle cx="13" cy="13" r={R} fill="none" stroke="var(--surface-3)" strokeWidth="3"/>
+        <circle cx="13" cy="13" r={R} fill="none" stroke={complete?'var(--w-light)':'var(--accent)'} strokeWidth="3"
+          strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C*(1-pct)}
+          transform="rotate(-90 13 13)" style={{transition:'stroke-dashoffset .6s cubic-bezier(.22,1,.36,1), stroke .3s'}}/>
+      </svg>
+      <span className="dayring__lbl">{complete?'✓':done+'/'+total}</span>
+    </span>
+  );
+}
+
+// ===== ONBOARDING =====
+// First-run guided flow: welcome → create a real first task → add a habit → done.
+// Only shows when there is no data at all; existing users never see it.
+function Onboarding({firstName,onCreateTask,onCreateHabit,onFinish}){
+  const [step,setStep]=useState(0);
+  const [taskName,setTaskName]=useState('');
+  const [taskWeight,setTaskWeight]=useState('medium');
+  const [habitName,setHabitName]=useState('');
+  const [habitIcon,setHabitIcon]=useState(HABIT_ICONS[0]);
+  const [madeTask,setMadeTask]=useState(false);
+  const [madeHabit,setMadeHabit]=useState(false);
+  const total=4;
+  function nextFromTask(){
+    const v=taskName.trim();
+    if(v){onCreateTask({name:v,weight:taskWeight});setMadeTask(true);}
+    setStep(2);
+  }
+  function nextFromHabit(){
+    const v=habitName.trim();
+    if(v){onCreateHabit({name:v,icon:habitIcon});setMadeHabit(true);}
+    setStep(3);
+  }
+  function finish(){
+    onFinish();
+    setTimeout(()=>fireConfetti(window.innerWidth/2,window.innerHeight*0.4,1.6),120);
+  }
+  function skipAll(){onFinish();} // skipping is fine — but it earns no confetti
+  return(
+    <div className="onboard-scrim">
+      <div className="onboard" role="dialog" aria-modal="true" aria-label="Welcome to Heft">
+        <div className="onboard__dots" aria-hidden="true">{Array.from({length:total},(_,i)=><span key={i} className="onboard__dot" data-on={i<=step?'true':'false'}/>)}</div>
+        {step===0&&(
+          <div className="onboard__step">
+            <div className="onboard__mark"><HeftMark size={48}/></div>
+            <h2 className="onboard__title">{firstName?('Welcome, '+firstName+'.'):'Welcome to Heft.'}</h2>
+            <p className="onboard__sub">Heft weighs your day so you carry it lightly. Tasks get a <strong>weight</strong> — Light, Medium, Heavy — so you can see what a day really costs before it starts.</p>
+            <div className="onboard__actions">
+              <button className="btn btn--primary onboard__cta" onClick={()=>setStep(1)}>Set up my day<Icon name="arrowright" size={15}/></button>
+              <button className="onboard__skip" onClick={skipAll}>Skip for now</button>
+            </div>
+          </div>
+        )}
+        {step===1&&(
+          <div className="onboard__step">
+            <h2 className="onboard__title">What's one thing on your plate?</h2>
+            <p className="onboard__sub">Add your first task. Don't overthink it — the one that's been nagging you works best.</p>
+            <input className="input onboard__input" autoFocus value={taskName} placeholder="e.g. Send the invoice to Alex" onChange={(e)=>setTaskName(e.target.value)} onKeyDown={(e)=>{if(e.key==='Enter'&&taskName.trim())nextFromTask();}}/>
+            <div className="onboard__weights">
+              <span className="field__lbl">How heavy does it feel?</span>
+              <div className="seg seg--weight">{WEIGHTS.slice(0,3).map(w=><button key={w} className="seg__opt" data-on={taskWeight===w?'true':'false'} style={{'--w':`var(--w-${w})`}} onClick={()=>setTaskWeight(w)}><span className="seg__dot"/>{WEIGHT_LABELS[w]}</button>)}</div>
+              <span className="field__hint">{WEIGHT_DESC[taskWeight]}</span>
+            </div>
+            <div className="onboard__actions">
+              <button className="btn btn--primary onboard__cta" onClick={nextFromTask} disabled={!taskName.trim()}>Add it<Icon name="arrowright" size={15}/></button>
+              <button className="onboard__skip" onClick={()=>setStep(2)}>Skip this</button>
+            </div>
+          </div>
+        )}
+        {step===2&&(
+          <div className="onboard__step">
+            <h2 className="onboard__title">One small daily habit?</h2>
+            <p className="onboard__sub">Habits live beside your tasks. Check one off each day and watch the streak grow.</p>
+            <div className="onboard__habitrow">
+              <span className="hmgr__ico" style={{cursor:'default'}}><HabitIcon icon={habitIcon} size={16}/></span>
+              <input className="input onboard__input" autoFocus value={habitName} placeholder="e.g. Read 10 pages" onChange={(e)=>setHabitName(e.target.value)} onKeyDown={(e)=>{if(e.key==='Enter'&&habitName.trim())nextFromHabit();}} style={{margin:0}}/>
+            </div>
+            <div className="habitnew__icons" style={{marginTop:4}}>
+              {HABIT_ICONS.map(ic=><button key={ic} type="button" className="habitnew__ico" data-on={habitIcon===ic?'true':'false'} onClick={()=>setHabitIcon(ic)}><Icon name={ic} size={14}/></button>)}
+            </div>
+            <div className="onboard__actions">
+              <button className="btn btn--primary onboard__cta" onClick={nextFromHabit} disabled={!habitName.trim()}>Add habit<Icon name="arrowright" size={15}/></button>
+              <button className="onboard__skip" onClick={()=>setStep(3)}>Skip this</button>
+            </div>
+          </div>
+        )}
+        {step===3&&(
+          <div className="onboard__step">
+            <div className="onboard__mark"><Icon name="checkcircle" size={44}/></div>
+            <h2 className="onboard__title">You're set.</h2>
+            <p className="onboard__sub">
+              {madeTask?'Your first task is on the board. ':'The board is ready when you are. '}
+              {madeHabit?'Your habit lives in the side panel. ':''}
+              Tap a task's circle once for <strong>in progress</strong>, twice to <strong>complete</strong> it — unfinished tasks can be carried to tomorrow with one tap.
+            </p>
+            <div className="onboard__actions">
+              <button className="btn btn--primary onboard__cta" onClick={finish}>Start my day<Icon name="arrowright" size={15}/></button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ===== ROOT APP =====
-function loadLocal(){try{return JSON.parse(localStorage.getItem('heft.v1')||'null');}catch{return null;}}
+function loadLocal(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'null');}catch{return null;}}
 
 function App({session}){
   const local=useMemo(loadLocal,[]);
@@ -1985,6 +2301,17 @@ function App({session}){
   const [profile,setProfile]=useState(local?.profile||(function(){const u=session&&session.user;const md=(u&&u.user_metadata)||{};return{first:md.first_name||'',last:md.last_name||'',email:(u&&u.email)||'',plan:'Personal',photo:null};})());
   const [typeface,setTypeface]=useState(local?.typeface||'Grotesque');
   const [accent,setAccent]=useState(local?.accent||'Clay');
+  const [celebrate,setCelebrate]=useState(local?.celebrate||'full');
+  useEffect(()=>{CELEBRATE=celebrate;},[celebrate]);
+  // One Escape closes whatever is on top — modals, menus, dialogs.
+  useEffect(()=>{
+    function onKey(e){
+      if(e.key!=='Escape')return;
+      setModal(m=>m?null:m);setCarryOpen(false);setShowTemplates(false);setSavingTemplate(v=>v?null:v);
+    }
+    window.addEventListener('keydown',onKey);
+    return()=>window.removeEventListener('keydown',onKey);
+  },[]);
   const [modal,setModal]=useState(null); // {type:'task'|'settings'|'habits'|'tags', data?:...}
   const [toast,setToast]=useState(null);
   const toastTimer=useRef(null);
@@ -2004,6 +2331,9 @@ function App({session}){
   const [savingTemplate,setSavingTemplate]=useState(null);
   const [resizing,setResizing]=useState(false);
   const [loaded,setLoaded]=useState(false);
+  // First-run onboarding — only when the account has no data at all.
+  const [showOnboard,setShowOnboard]=useState(false);
+  const onboardChecked=useRef(false);
   const [syncing,setSyncing]=useState(false);
   const [saveError,setSaveError]=useState(false);
   const [lastSyncedAt,setLastSyncedAt]=useState(0); // ms timestamp of last successful sync (pull OR save)
@@ -2039,6 +2369,8 @@ function App({session}){
     if(s.taskArchive)setTaskArchive(s.taskArchive);
     if(s.tags)setTags(s.tags);
     if(s.profile)setProfile(p=>({...s.profile,photo:s.profile.photo??p.photo}));
+    if(typeof s.dark==='boolean')setDark(s.dark);
+    if(s.celebrate)setCelebrate(s.celebrate);
     if(s.view)setView(s.view);
     if(s.typeface)setTypeface(s.typeface);
     if(s.accent)setAccent(s.accent);
@@ -2051,6 +2383,7 @@ function App({session}){
   // Pull from cloud. force=true always applies cloud; otherwise only if cloud is NEWER.
   // silent=true (auto-polls) avoids touching visible sync UI so it doesn't flicker.
   async function pullCloud(force,silent){
+    if(SANDBOX){setLoaded(true);if(!silent)setSyncing(false);return;}
     if(!silent)setSyncing(true);
     try{
       const{data,error}=await sb.from('heft_state').select('data,updated_at').eq('user_id',session.user.id).maybeSingle();
@@ -2082,8 +2415,9 @@ function App({session}){
     setSyncing(true);flashPill('syncing');
     const now=Date.now();lastSaveAt.current=now;
     const ts=new Date(now).toISOString();
-    const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
-    localStorage.setItem('heft.v1',JSON.stringify(blob));
+    const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,dark,celebrate,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
+    localStorage.setItem(LS_KEY,JSON.stringify(blob));
+    if(SANDBOX){setSyncing(false);flashPill('ok');return;}
     const{error}=await sb.from('heft_state').upsert({user_id:session.user.id,data:blob,updated_at:ts},{onConflict:'user_id'});
     if(error){setSaveError(true);flashPill('error');setSyncing(false);console.warn('[Heft] manualSync save failed:',error);return;}
     setSaveError(false);dirtyRef.current=false;setLastSyncedAt(Date.now());await pullCloud(false);
@@ -2099,8 +2433,9 @@ function App({session}){
         if(saveTimer.current){clearTimeout(saveTimer.current);saveTimer.current=null;}
         const now=Date.now();lastSaveAt.current=now;
         const ts=new Date(now).toISOString();
-        const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
-        localStorage.setItem('heft.v1',JSON.stringify(blob));
+        const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,dark,celebrate,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
+        localStorage.setItem(LS_KEY,JSON.stringify(blob));
+        if(SANDBOX)return;
         sb.from('heft_state').upsert({user_id:session.user.id,data:blob,updated_at:ts},{onConflict:'user_id'}).then(({error})=>{
           if(error){setSaveError(true);console.warn('[Heft] background save failed:',error);}
           else{setSaveError(false);dirtyRef.current=false;setLastSyncedAt(Date.now());}
@@ -2147,16 +2482,19 @@ function App({session}){
     saveTimer.current=setTimeout(async()=>{
       const now=Date.now();lastSaveAt.current=now;
       const ts=new Date(now).toISOString();
-      const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
-      localStorage.setItem('heft.v1',JSON.stringify(blob));
+      const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,dark,celebrate,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};
+      localStorage.setItem(LS_KEY,JSON.stringify(blob));
+      const settlePill=()=>setSyncPill(pv=>{if(pv&&pv.state==='syncing'){if(pillTimer.current)clearTimeout(pillTimer.current);pillTimer.current=setTimeout(()=>setSyncPill(null),1600);return{state:'ok'};}return pv;});
+      if(SANDBOX){setSaveError(false);dirtyRef.current=false;settlePill();return;}
       const{error}=await sb.from('heft_state').upsert({user_id:session.user.id,data:blob,updated_at:ts},{onConflict:'user_id'});
-      if(error){setSaveError(true);console.warn('[Heft] save failed:',error);}else{setSaveError(false);dirtyRef.current=false;setLastSyncedAt(Date.now());}
+      if(error){setSaveError(true);console.warn('[Heft] save failed:',error);}else{setSaveError(false);dirtyRef.current=false;setLastSyncedAt(Date.now());settlePill();}
     },500);
   },[loaded,tasks,habits,habitLog,habitArchive,taskArchive,tags,profile,view,dark,typeface,accent,sidebarWidth,sort,rollover,templates]);
 
-  async function logout(){await sb.auth.signOut();setModal(null);}
+  async function logout(){if(SANDBOX){setModal(null);return;}await sb.auth.signOut();setModal(null);}
 
   const undoRef=useRef(null);
+  const dayCompleteFor=useRef(null); // day-key the day-complete moment already fired for
   function showToast(msg,action=null){
     if(toastTimer.current)clearTimeout(toastTimer.current);
     setToast({msg,action});
@@ -2167,7 +2505,7 @@ function App({session}){
   // Checkbox tap cycle. "completed" (the check) is decoupled from "stage" (the column):
   // a task can be checked off as complete but stays in its current column until every
   // subtask is done — only then does it move to the Done column.
-  function cycleStage(id){
+  function cycleStage(id,evt){
     const x=tasks.find(t=>t.id===id);
     if(!x)return;
     const subs=x.subtasks||[];
@@ -2179,6 +2517,33 @@ function App({session}){
     else if(allSubDone){patch={completed:true,stage:'done'};} // complete → move to Done
     else{patch={completed:true,stage:'doing'};} // checked complete in place, stays in its column
     setTasks(ts=>ts.map(t=>t.id===id?{...t,...patch}:t));
+    // First-time coach mark for the 3-state checkbox — taught in-product, once.
+    if(patch.stage==='doing'&&!patch.completed&&!localStorage.getItem('heft.hint.cycle')){
+      localStorage.setItem('heft.hint.cycle','1');
+      showToast('In progress — tap the circle again to complete');
+    }
+    if(!patch.completed)dayCompleteFor.current=null; // unchecking re-arms the day moment
+    // Celebration: burst at the checkbox on completion; day-complete moment when
+    // this was the last unfinished task of the focused day (fires once per day).
+    if(patch.completed){
+      let cx=window.innerWidth/2,cy=window.innerHeight/2;
+      if(evt&&evt.currentTarget&&evt.currentTarget.getBoundingClientRect){
+        const r=evt.currentTarget.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;
+      }else if(evt&&evt.clientX!=null){cx=evt.clientX;cy=evt.clientY;}
+      const dk=dayKey(focusDate);
+      const remaining=tasks.filter(t=>t.id!==id&&(t.date||todayKeyNow())===dk&&t.stage!=='done'&&!t.completed).length;
+      if(remaining===0&&dayCompleteFor.current!==dk){
+        dayCompleteFor.current=dk;
+        setTimeout(fireDayComplete,180);
+        showToast('Day complete — everything’s done ✨');
+      }else if(remaining>0){
+        fireConfetti(cx,cy,1);
+        if(CELEBRATE!=='off'){
+          const msgs=['Nice — '+remaining+' left today','One down. '+remaining+' to go','Good momentum — '+remaining+' remaining','Done ✓','That one’s off your shoulders','Steady — '+remaining+' still open'];
+          showToast(msgs[Math.floor(Math.random()*msgs.length)]);
+        }
+      }
+    }
   }
 
   const filteredTasks=useMemo(()=>{
@@ -2214,13 +2579,30 @@ function App({session}){
     document.documentElement.style.setProperty('--font-display',f.display);
   },[typeface]);
 
+  // Decide onboarding once, after the initial cloud pull settles. Anyone with
+  // existing tasks or habits is grandfathered in silently.
+  useEffect(()=>{
+    if(!loaded||onboardChecked.current)return;
+    onboardChecked.current=true;
+    if(localStorage.getItem(LS_ONBOARD_KEY))return;
+    if(tasks.length===0&&habits.length===0)setShowOnboard(true);
+    else localStorage.setItem(LS_ONBOARD_KEY,'1');
+  },[loaded]);
+
   const lbl=fullDateLabel(focusDate);
   const isMobile=window.innerWidth<768;
+  // Day progress for the ring: all tasks on the focused day, unfiltered.
+  const dayStats=useMemo(()=>{
+    const dk=dayKey(focusDate);
+    const list=tasks.filter(t=>(t.date||todayKeyNow())===dk);
+    return{total:list.length,done:list.filter(t=>t.completed||t.stage==='done').length};
+  },[tasks,focusDate]);
 
   // ===== Daily rollover: move the focused day's unfinished tasks to the next day =====
   const focusKey=dayKey(focusDate);
   const todayK=dayKey(todayDate());
-  const targetDate=shiftDay(focusDate,1);
+  // Carrying from a past day brings tasks to TODAY, not to another day still in the past.
+  const targetDate=dayKey(focusDate)<dayKey(todayDate())?todayDate():shiftDay(focusDate,1);
   const targetKey=dayKey(targetDate);
   const unfinished=useMemo(()=>tasks.filter(t=>(t.date||todayKeyNow())===focusKey&&t.stage!=='done'&&!t.completed),[tasks,focusKey]);
   const nextLabel=targetDate.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
@@ -2242,13 +2624,15 @@ function App({session}){
 
   // Carry-over pill → confirm dialog → batched move (no move on the pill click itself).
   function confirmCarry(){
-    const ids=unfinished.map(t=>t.id);const n=ids.length;
+    const moved=unfinished.map(t=>({id:t.id,date:t.date||todayKeyNow()}));const n=moved.length;
     if(n===0){setCarryOpen(false);return;}
-    moveDayBulk(ids,targetKey);
+    moveDayBulk(moved.map(m=>m.id),targetKey);
     setBannerDismissed(d=>({...d,[focusKey]:true}));
     setCarryOpen(false);
     if(flashPill)flashPill('syncing');
-    showToast('Moved '+n+' to '+carryLabel(targetDate));
+    showToast('Moved '+n+' to '+carryLabel(targetDate),{label:'Undo',fn:()=>{
+      setTasks(ts=>ts.map(t=>{const m=moved.find(x=>x.id===t.id);return m?{...t,date:m.date}:t;}));
+    }});
   }
 
   // re-evaluate the scheduled trigger on a minute tick while the app is open
@@ -2268,6 +2652,20 @@ function App({session}){
   }
   const triggered=rolloverTriggered();
   const showBanner=triggered&&!rollover.auto&&!bannerDismissed[focusKey];
+  // Tasks stranded on ANY past day are invisible from today's board — surface them here.
+  const pastUnfinished=useMemo(()=>focusKey===todayK&&rollover.mode!=='manual'
+    ?tasks.filter(t=>(t.date||todayKeyNow())<todayK&&t.stage!=='done'&&!t.completed)
+    :[],[tasks,focusKey,todayK,rollover.mode]);
+  const showPastBanner=pastUnfinished.length>0&&!bannerDismissed['past:'+todayK];
+  function rescuePast(){
+    const moved=pastUnfinished.map(t=>({id:t.id,date:t.date||todayKeyNow()}));
+    moveDayBulk(moved.map(m=>m.id),todayK);
+    setBannerDismissed(d=>({...d,['past:'+todayK]:true}));
+    if(flashPill)flashPill('syncing');
+    showToast('Brought '+moved.length+' to today',{label:'Undo',fn:()=>{
+      setTasks(ts=>ts.map(t=>{const m=moved.find(x=>x.id===t.id);return m?{...t,date:m.date}:t;}));
+    }});
+  }
 
   // auto mode: fire the move silently (toast + Undo only) once the trigger is hot
   useEffect(()=>{
@@ -2281,11 +2679,16 @@ function App({session}){
       <div className="apptop--desk desktop-only">
         <div className="apptop__brandL"><HeftMark size={24}/><span className="apptop__brandLname">Heft</span></div>
         <div className="apptop__datenav">
-          <button className="datenav__arrow" onClick={()=>setFocusDate(shiftDay(focusDate,-1))}><Icon name="chevL" size={18}/></button>
+          <button className="datenav__arrow" aria-label="Previous day" onClick={()=>setFocusDate(shiftDay(focusDate,-1))}><Icon name="chevL" size={18}/></button>
           <span className="datenav__date">{lbl.text}</span>
-          <button className="datenav__arrow" onClick={()=>setFocusDate(shiftDay(focusDate,1))}><Icon name="chevron" size={18}/></button>
+          <button className="datenav__arrow" aria-label="Next day" onClick={()=>setFocusDate(shiftDay(focusDate,1))}><Icon name="chevron" size={18}/></button>
+          <DayProgress done={dayStats.done} total={dayStats.total}/>
         </div>
         <div className="apptop__rightZone">
+          <div className="apptop__viewtoggle" role="group" aria-label="Board view">
+            <button className="viewtoggle__opt" data-on={view==='kanban'?'true':'false'} onClick={()=>setView('kanban')}>Board</button>
+            <button className="viewtoggle__opt" data-on={view==='weight'?'true':'false'} onClick={()=>setView('weight')}>Weight</button>
+          </div>
           <span className="sync-wrap"><button className="apptop__gear" onClick={manualSync} title="Sync now" style={{opacity:syncing?0.5:1}}><Icon name="refresh" size={17}/></button>{saveError&&<span className="sync-err-dot" title="Unsaved changes — tap to retry"/>}</span>
           <button className="apptop__avatar" onClick={()=>setModal({type:'settings'})}>{profile.photo?<img src={profile.photo} style={{width:'100%',height:'100%',objectFit:'cover',borderRadius:'50%'}} alt=""/>:((profile.first[0]||'')+(profile.last[0]||'')).toUpperCase()||'U'}</button>
         </div>
@@ -2299,15 +2702,17 @@ function App({session}){
 
       {/* MOBILE DATE BAR */}
       <div className="datebar mobile-only">
-        <button className="datebar__panel" onClick={()=>setSidebarOpen(o=>!o)}><Icon name="filter" size={16}/>{saveError&&<span className="sync-err-dot" style={{position:'absolute',top:-3,right:-3}}/>}</button>
+        <button className="datebar__panel" aria-label="Calendar, habits & filters" onClick={()=>setSidebarOpen(o=>!o)}><Icon name="filter" size={16}/>{saveError&&<span className="sync-err-dot" style={{position:'absolute',top:-3,right:-3}}/>}</button>
         <div className="datebar__center">
-          <button className="datebar__arrow" onClick={()=>setFocusDate(shiftDay(focusDate,-1))}><Icon name="chevL" size={18}/></button>
+          <button className="datebar__arrow" aria-label="Previous day" onClick={()=>setFocusDate(shiftDay(focusDate,-1))}><Icon name="chevL" size={18}/></button>
           <div className="datebar__dateblock">
-            <span className="datebar__date">{lbl.text}</span>
+            <span className="datebar__date">{focusDate.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:focusDate.getFullYear()!==todayDate().getFullYear()?'numeric':undefined})}</span>
             {!lbl.isToday&&<button className="datebar__today" onClick={()=>setFocusDate(todayDate())}>Today</button>}
           </div>
-          <button className="datebar__arrow" onClick={()=>setFocusDate(shiftDay(focusDate,1))}><Icon name="chevron" size={18}/></button>
+          <button className="datebar__arrow" aria-label="Next day" onClick={()=>setFocusDate(shiftDay(focusDate,1))}><Icon name="chevron" size={18}/></button>
+          <DayProgress done={dayStats.done} total={dayStats.total}/>
         </div>
+        <button className="datebar__panel datebar__panel--right" aria-label={view==='kanban'?'Switch to Weight view':'Switch to Board view'} onClick={()=>setView(v=>v==='kanban'?'weight':'kanban')}><Icon name="layout" size={16}/></button>
       </div>
 
       {/* MAIN */}
@@ -2353,10 +2758,19 @@ function App({session}){
             </div>
           </div>
         )}
+        {!showBanner&&showPastBanner&&(
+          <div className="rollbanner" role="status">
+            <span className="rollbanner__txt"><strong>{pastUnfinished.length} unfinished</strong> from earlier day{pastUnfinished.length===1?'':'s'} — bring {pastUnfinished.length===1?'it':'them'} to today?</span>
+            <div className="rollbanner__actions">
+              <button type="button" className="btn btn--primary btn--sm" onClick={rescuePast}><Icon name="carryover" size={14}/>Bring to today</button>
+              <button type="button" className="rollbanner__x" onClick={()=>setBannerDismissed(d=>({...d,['past:'+todayK]:true}))} aria-label="Dismiss"><Icon name="x" size={14}/></button>
+            </div>
+          </div>
+        )}
         </div>
 
         {/* Templates popover */}
-        {showTemplates&&!isMobile&&(
+        {showTemplates&&(
           <TemplatesPopover
             templates={templates}
             onUse={(t)=>{
@@ -2397,7 +2811,7 @@ function App({session}){
 
         {/* Bottom-right dock — secondary "Carry over" pill beside the primary "Add task" FAB */}
         <div className="fabdock">
-          {unfinished.length>0&&!query.trim()&&(
+          {unfinished.length>0&&!query.trim()&&(focusKey<todayK||(focusKey===todayK&&new Date().getHours()>=17))&&(
             <button type="button" className="movepill" onClick={()=>setCarryOpen(true)} title={'Carry all unfinished tasks to '+carryLabel(targetDate)}>
               <Icon name="carryover" size={17}/>Carry over
             </button>
@@ -2411,7 +2825,7 @@ function App({session}){
         {/* Carry-over confirm dialog */}
         {carryOpen&&(
           <div className="modal-scrim" onMouseDown={()=>setCarryOpen(false)}>
-            <div className="modal__panel modal__panel--carry" onMouseDown={(e)=>e.stopPropagation()}>
+            <div className="modal__panel modal__panel--carry" role="dialog" aria-modal="true" aria-label="Carry over unfinished tasks" onMouseDown={(e)=>e.stopPropagation()}>
               <div className="modal__body carrydlg">
                 <span className="carrydlg__ico"><Icon name="carryover" size={24}/></span>
                 <span className="carrydlg__title">Carry over unfinished?</span>
@@ -2431,9 +2845,14 @@ function App({session}){
         <TaskModal
           initial={modal.data}
           tags={tags}
-          onSave={(t)=>{
-            setTasks(ts=>{const idx=ts.findIndex(x=>x.id===t.id);return idx>=0?ts.map(x=>x.id===t.id?t:x):[...ts,t];});
-            showToast(modal.data?.name?'Task saved':'Task added');
+          onSave={(t,modalTags)=>{
+            setTasks(ts=>{const idx=ts.findIndex(x=>x.id===t.id);let next=idx>=0?ts.map(x=>x.id===t.id?t:x):[...ts,t];
+              if(modalTags){const removed=tags.filter(x=>!modalTags.includes(x));if(removed.length)next=next.map(x=>removed.includes(x.tag)?{...x,tag:''}:x);}
+              return next;});
+            if(modalTags)setTags(modalTags);
+            const savedDay=t.date||todayKeyNow();
+            if(savedDay!==dayKey(focusDate)){showToast('Added to '+carryLabel(new Date(savedDay+'T00:00:00')),{label:'View',fn:()=>setFocusDate(new Date(savedDay+'T00:00:00'))});}
+            else showToast(modal.data?.name?'Task saved':'Task added');
             setModal(null);
           }}
           onDelete={(id)=>{const del=tasks.find(t=>t.id===id);setTasks(ts=>ts.filter(t=>t.id!==id));if(del)setTaskArchive(a=>[{...del,archivedAt:Date.now()},...a.filter(x=>x.id!==id)]);setModal(null);undoRef.current=del;showToast('Task archived',{label:'Undo',fn:()=>{const d=undoRef.current;if(d){setTaskArchive(a=>a.filter(x=>x.id!==d.id));setTasks(ts=>ts.some(x=>x.id===d.id)?ts:[...ts,d]);undoRef.current=null;showToast('Task restored ✓');}}}); }}
@@ -2443,7 +2862,7 @@ function App({session}){
           onClose={()=>setModal(null)}/>
       )}
       {modal?.type==='settings'&&(
-        <SettingsModal profile={profile} userId={session.user.id} dark={dark} setDark={setDark} view={view} setView={setView} typeface={typeface} setTypeface={setTypeface} accent={accent} setAccent={setAccent} zoom={zoom} setZoom={setZoom} subExpandDefault={subExpandDefault} setSubExpandDefault={setSubExpandDefault} rollover={rollover} setRollover={setRollover} templatesCount={templates.length} onOpenTemplates={()=>{setModal(null);setShowTemplates(true);}} onSave={setProfile} onClearTasks={()=>{const dk=dayKey(focusDate);const removed=tasks.filter(t=>(t.date||todayKeyNow())===dk);if(removed.length){const stamp=Date.now();setTaskArchive(a=>[...removed.map(t=>({...t,archivedAt:stamp})),...a.filter(x=>!removed.some(r=>r.id===x.id))]);}setTasks(ts=>ts.filter(t=>(t.date||todayKeyNow())!==dk));showToast(removed.length===1?'1 task archived for this day':removed.length+' tasks archived for this day');setModal(null);}} clearScopeLabel={fullDateLabel(focusDate).text} clearCount={tasks.filter(t=>(t.date||todayKeyNow())===dayKey(focusDate)).length} onOpenArchive={()=>setModal({type:'habitArchive'})} archiveCount={habitArchive.length+taskArchive.length} onPhotoSave={(url)=>{const updated={...profile,photo:url};setProfile(updated);const now=Date.now();lastSaveAt.current=now;const ts=new Date(now).toISOString();const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile:updated,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};localStorage.setItem('heft.v1',JSON.stringify(blob));sb.from('heft_state').upsert({user_id:session.user.id,data:blob,updated_at:ts},{onConflict:'user_id'});showToast('Profile photo synced ✓');}} onClose={()=>setModal(null)} onLogout={logout}/>
+        <SettingsModal profile={profile} userId={session.user.id} dark={dark} setDark={setDark} view={view} setView={setView} typeface={typeface} setTypeface={setTypeface} accent={accent} setAccent={setAccent} celebrate={celebrate} setCelebrate={setCelebrate} zoom={zoom} setZoom={setZoom} subExpandDefault={subExpandDefault} setSubExpandDefault={setSubExpandDefault} rollover={rollover} setRollover={setRollover} templatesCount={templates.length} onOpenTemplates={()=>{setModal(null);setShowTemplates(true);}} onSave={setProfile} onClearTasks={()=>{const dk=dayKey(focusDate);const removed=tasks.filter(t=>(t.date||todayKeyNow())===dk);if(removed.length){const stamp=Date.now();setTaskArchive(a=>[...removed.map(t=>({...t,archivedAt:stamp})),...a.filter(x=>!removed.some(r=>r.id===x.id))]);}setTasks(ts=>ts.filter(t=>(t.date||todayKeyNow())!==dk));showToast(removed.length===1?'1 task archived for this day':removed.length+' tasks archived for this day');setModal(null);}} clearScopeLabel={fullDateLabel(focusDate).text} clearCount={tasks.filter(t=>(t.date||todayKeyNow())===dayKey(focusDate)).length} onOpenArchive={()=>setModal({type:'habitArchive'})} archiveCount={habitArchive.length+taskArchive.length} onPhotoSave={(url)=>{const updated={...profile,photo:url};setProfile(updated);const now=Date.now();lastSaveAt.current=now;const ts=new Date(now).toISOString();const blob={tasks,habits,habitLog,habitArchive,taskArchive,tags,profile:updated,dark,celebrate,view,typeface,accent,sidebarWidth,sort,rollover,templates,_savedAt:now};localStorage.setItem(LS_KEY,JSON.stringify(blob));if(!SANDBOX)sb.from('heft_state').upsert({user_id:session.user.id,data:blob,updated_at:ts},{onConflict:'user_id'});showToast('Profile photo synced ✓');}} onClose={()=>setModal(null)} onLogout={logout}/>
       )}
       {modal?.type==='habits'&&(
         <HabitManager habits={habits} onAdd={(name,icon)=>setHabits(hs=>[...hs,{id:uid(),name,icon:icon||'check'}])} onRemove={(id)=>{const h=habits.find(x=>x.id===id);setHabits(hs=>hs.filter(x=>x.id!==id));if(h){setHabitArchive(a=>[{...h,archivedAt:Date.now()},...a.filter(x=>x.id!==id)]);showToast('Habit archived',{label:'Undo',fn:()=>{setHabitArchive(a=>a.filter(x=>x.id!==id));setHabits(hs=>hs.some(x=>x.id===id)?hs:[...hs,h]);}});}}} onEdit={(id,patch)=>setHabits(hs=>hs.map(h=>h.id===id?{...h,...patch}:h))} onClose={()=>setModal(null)}/>
@@ -2464,7 +2883,14 @@ function App({session}){
           onClose={()=>setSavingTemplate(null)}/>
       )}
       {modal?.type==='tags'&&(
-        <TagManager tags={tags} onAdd={(name)=>setTags(ts=>ts.includes(name)?ts:[...ts,name])} onRemove={(name)=>setTags(ts=>ts.filter(t=>t!==name))} onRename={(old,next)=>setTags(ts=>ts.map(t=>t===old?next:t))} onClose={()=>setModal(null)}/>
+        <TagManager tags={tags} onAdd={(name)=>setTags(ts=>ts.includes(name)?ts:[...ts,name])} onRemove={(name)=>{setTags(ts=>ts.filter(t=>t!==name));setTasks(ts=>ts.map(t=>t.tag===name?{...t,tag:''}:t));if(activeTag===name)setActiveTag(null);}} onRename={(old,next)=>{setTags(ts=>ts.map(t=>t===old?next:t));setTasks(ts=>ts.map(t=>t.tag===old?{...t,tag:next}:t));if(activeTag===old)setActiveTag(next);}} onClose={()=>setModal(null)}/>
+      )}
+      {showOnboard&&(
+        <Onboarding
+          firstName={profile.first}
+          onCreateTask={({name,weight})=>setTasks(ts=>[...ts,{id:uid(),seq:Date.now(),date:todayKeyNow(),name,weight,stage:'todo',completed:false,tag:'',notes:'',subtasks:[]}])}
+          onCreateHabit={({name,icon})=>setHabits(hs=>[...hs,{id:uid(),name,icon}])}
+          onFinish={()=>{localStorage.setItem(LS_ONBOARD_KEY,'1');setShowOnboard(false);}}/>
       )}
     </div>
   );
@@ -2567,15 +2993,16 @@ function AppSplash(){
 }
 
 function Root(){
-  const[session,setSession]=useState(null);
-  const[loading,setLoading]=useState(true);
+  const[session,setSession]=useState(SANDBOX?{user:{id:'sandbox-user',email:'sandbox@heft.test',user_metadata:{first_name:'Sandbox',last_name:'Tester'}}}:null);
+  const[loading,setLoading]=useState(!SANDBOX);
   // Guarantee splash shows for at least 1.8s even on fast connections
   const[splashDone,setSplashDone]=useState(false);
   useEffect(()=>{
-    const t=setTimeout(()=>setSplashDone(true),1800);
+    const t=setTimeout(()=>setSplashDone(true),SANDBOX?300:900);
     return()=>clearTimeout(t);
   },[]);
   useEffect(()=>{
+    if(SANDBOX)return;
     sb.auth.getSession().then(({data:{session}})=>{setSession(session);setLoading(false);});
     const{data:{subscription}}=sb.auth.onAuthStateChange((_,s)=>{setSession(s);setLoading(false);});
     return()=>subscription.unsubscribe();
@@ -2589,7 +3016,7 @@ function Root(){
 ReactDOM.createRoot(document.getElementById('root')).render(<Root/>);
 </script>
 <script>
-if('serviceWorker' in navigator){
+if('serviceWorker' in navigator && !new URLSearchParams(location.search).has('sandbox')){
   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 }
 </script>
