@@ -1604,7 +1604,6 @@ function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubTog
           <header className="card__head">
             <span data-nodrag="true"><Checkbox stage={task.stage} completed={task.completed} onCycle={onCycle} weight={weight}/></span>
             <h4 className="card__name">{task.name}</h4>
-            <span className="card__wbadge" style={{'--w':`var(--w-${weight})`}}>{weight[0].toUpperCase()+weight.slice(1)}</span>
             <span className="card__grip" aria-hidden="true"><Icon name="grip" size={18}/></span>
           </header>
           {task.notes&&<p className="card__notes">{task.notes}</p>}
@@ -2396,7 +2395,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.18.0';
+const HEFT_VERSION='0.18.1';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
