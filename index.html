@@ -536,7 +536,7 @@ button.setrow:hover{background:var(--surface-2);}
   .kanban{flex-direction:column;height:auto;}
   .col{width:100%;max-height:none;min-width:0;height:auto;}
   .col__body{overflow:visible;}
-  .board{padding:12px;padding-bottom:calc(128px + env(safe-area-inset-bottom,0px));overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:block;}
+  .board{padding:12px;padding-bottom:calc(160px + env(safe-area-inset-bottom,0px));overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:block;}
   .board::-webkit-scrollbar{display:none;}
   .board__zoom{height:auto;min-height:100%;flex:none;}
   .card__wbadge{display:inline-flex;}
@@ -590,7 +590,7 @@ button.setrow:hover{background:var(--surface-2);}
 
 /* daily-rollover contextual banner — in-flow at the bottom of the board */
 @keyframes rollin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.rollbanner{align-self:flex-start;display:inline-flex;align-items:center;gap:13px;max-width:100%;margin-top:14px;flex-shrink:0;padding:11px 12px 11px 15px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border-strong));border-radius:13px;box-shadow:0 1px 3px rgba(0,0,0,.04);animation:rollin .22s cubic-bezier(.22,1,.36,1);}
+.rollbanner{align-self:center;display:inline-flex;align-items:center;justify-content:center;gap:13px;max-width:100%;margin-top:14px;flex-shrink:0;padding:11px 12px 11px 15px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border-strong));border-radius:13px;box-shadow:0 1px 3px rgba(0,0,0,.04);animation:rollin .22s cubic-bezier(.22,1,.36,1);}
 .rollbanner__txt{font-size:12.5px;font-weight:600;color:var(--text-dim);line-height:1.3;}
 .rollbanner__txt strong{color:var(--text);font-weight:700;}
 .rollbanner__actions{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;}
@@ -616,10 +616,11 @@ button.setrow:hover{background:var(--surface-2);}
 .rollopt__time{display:flex;align-items:center;gap:10px;padding:10px 12px 11px 41px;background:var(--surface-2);}
 .input--time{width:auto;min-width:120px;}
 @media(max-width:479px){
-  .rollbanner{align-self:stretch;width:100%;margin-bottom:8px;}
-  .rollbanner__txt{flex:1;}
-  .rollbanner .btn--sm{min-height:44px;padding:11px 14px;}
-  .rollbanner__x{width:44px;height:44px;}
+  .rollbanner{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));align-self:auto;width:auto;margin:0;z-index:24;flex-wrap:wrap;justify-content:center;text-align:center;box-shadow:0 12px 32px -12px rgba(30,20,10,.5);}
+  .rollbanner__txt{flex:0 1 auto;text-align:center;}
+  .rollbanner__actions{flex:0 0 auto;}
+  .rollbanner .btn--sm{min-height:44px;padding:11px 16px;}
+  .rollbanner__x{width:40px;height:40px;}
   .rollopt{padding:13px 12px;}
 }
 
@@ -640,6 +641,7 @@ button.setrow:hover{background:var(--surface-2);}
 .crop-zoom__lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);white-space:nowrap;}
 .crop-zoom input[type=range]{flex:1;accent-color:var(--accent);}
 
+body.heft-dragging .rollbanner,body.heft-dragging .fabdock,body.heft-dragging .toast{pointer-events:none !important;}
 .card-drag-ghost{position:fixed;z-index:900;pointer-events:none;background:var(--surface);border:1.5px solid var(--accent);border-radius:12px;padding:10px 14px;box-shadow:0 18px 40px -10px rgba(30,20,10,.55);max-width:220px;font-size:13px;font-weight:600;color:var(--text);line-height:1.3;transform:rotate(2deg) scale(1.05);opacity:.92;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 .board-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;gap:16px;min-height:320px;flex:1;}
@@ -1688,92 +1690,120 @@ function BoardEmptyState({onAddTask}){
   );
 }
 
-// Pointer-event drag — zero delay on iOS/Android, works on desktop too.
+// Unified pointer drag — mouse + touch (iPhone/iPad). On touch a short long-press
+// arms the drag so quick vertical swipes still scroll the board; once armed we block
+// native scrolling and auto-scroll at the edges so vertically-stacked columns are reachable.
 function usePointerDrag(setTasks,setDragId){
   const ghostRef=useRef(null);
   const stateRef=useRef(null);
+  const rafRef=useRef(0);
+  const autoRef=useRef({el:null,dy:0});
   const onPD=useCallback((e,task)=>{
     if(e.target.closest('[data-nodrag]'))return;
     if(e.pointerType==='mouse'&&e.button!==0)return;
-    try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}
     const isTouch=e.pointerType==='touch';
     const cap=e.currentTarget;
-    stateRef.current={id:task.id,name:task.name,sx:e.clientX,sy:e.clientY,started:false,lastCol:null,armed:!isTouch,holdTimer:null};
-    // On touch, "arm" the drag after a short hold so quick vertical swipes still scroll.
-    // 180ms is barely perceptible but enough to tell a scroll-flick from a drag intent.
+    const card=e.currentTarget;
+    try{cap.setPointerCapture(e.pointerId);}catch(_){}
+    const st={id:task.id,name:task.name,stage:task.stage,sx:e.clientX,sy:e.clientY,lx:e.clientX,ly:e.clientY,started:false,armed:!isTouch,canceled:false,lastCol:null,holdTimer:null};
+    stateRef.current=st;
+    function blockScroll(ev){ if(stateRef.current&&stateRef.current.armed&&stateRef.current.started) ev.preventDefault(); }
+    window.addEventListener('touchmove',blockScroll,{passive:false});
     if(isTouch){
-      stateRef.current.holdTimer=setTimeout(()=>{
-        const s=stateRef.current;if(!s)return;
-        s.armed=true;
-        if(navigator.vibrate)navigator.vibrate(8); // subtle haptic cue that drag is ready
-      },180);
+      st.holdTimer=setTimeout(()=>{
+        if(!stateRef.current||st.canceled)return;
+        st.armed=true; beginDrag(st.lx,st.ly);
+        if(navigator.vibrate){try{navigator.vibrate(10);}catch(_){}}
+      },200);
     }
-    function clearHold(){const s=stateRef.current;if(s&&s.holdTimer){clearTimeout(s.holdTimer);s.holdTimer=null;}}
+    function beginDrag(x,y){
+      if(!stateRef.current||st.started)return;
+      st.started=true; setDragId(st.id);
+      if(card){card.style.opacity='.4';card.style.transition='opacity .12s';}
+      const g=document.createElement('div');
+      g.className='card-drag-ghost'; g.textContent=st.name;
+      g.style.left=(x-90)+'px'; g.style.top=(y-24)+'px';
+      document.body.appendChild(g); ghostRef.current=g;
+      document.body.style.userSelect='none';
+      document.body.classList.add('heft-dragging');
+      const col=highlight(x,y); if(col)st.lastCol=col.dataset.stage;
+      startAuto();
+    }
+    function moveGhost(x,y){ const g=ghostRef.current; if(g){g.style.left=(x-90)+'px';g.style.top=(y-24)+'px';} }
+    function highlight(x,y){
+      document.querySelectorAll('.col').forEach(c=>c.setAttribute('data-over','false'));
+      const g=ghostRef.current; if(g)g.style.display='none';
+      const el=document.elementFromPoint(x,y);
+      if(g)g.style.display='';
+      const col=el&&el.closest('.col');
+      if(col)col.setAttribute('data-over','true');
+      return col;
+    }
+    function scrollerAt(x,y){
+      let el=document.elementFromPoint(x,y);
+      while(el&&el!==document.body&&el!==document.documentElement){
+        const cs=getComputedStyle(el);
+        if(/(auto|scroll)/.test(cs.overflowY)&&el.scrollHeight>el.clientHeight+2)return el;
+        el=el.parentElement;
+      }
+      return document.querySelector('.board');
+    }
+    function computeAuto(x,y){
+      const el=scrollerAt(x,y); autoRef.current.el=el; autoRef.current.dy=0;
+      if(!el)return;
+      const r=el.getBoundingClientRect(); const EDGE=70;
+      if(y<r.top+EDGE){const p=Math.min(1,(r.top+EDGE-y)/EDGE);autoRef.current.dy=-Math.ceil(16*p);}
+      else if(y>r.bottom-EDGE){const p=Math.min(1,(y-(r.bottom-EDGE))/EDGE);autoRef.current.dy=Math.ceil(16*p);}
+    }
+    function startAuto(){ if(rafRef.current)return;
+      const loop=()=>{ const a=autoRef.current;
+        if(a.el&&a.dy){ const before=a.el.scrollTop; a.el.scrollTop+=a.dy;
+          if(a.el.scrollTop!==before&&stateRef.current){ const col=highlight(st.lx,st.ly); if(col)st.lastCol=col.dataset.stage; } }
+        rafRef.current=requestAnimationFrame(loop); };
+      rafRef.current=requestAnimationFrame(loop);
+    }
+    function stopAuto(){ if(rafRef.current){cancelAnimationFrame(rafRef.current);rafRef.current=0;} autoRef.current={el:null,dy:0}; }
+    function onMove(ev){
+      if(!stateRef.current)return;
+      st.lx=ev.clientX; st.ly=ev.clientY;
+      const dist=Math.hypot(ev.clientX-st.sx,ev.clientY-st.sy);
+      if(!st.armed){
+        if(dist>10){ st.canceled=true; teardown(ev); stateRef.current=null; }
+        return;
+      }
+      if(!st.started){ if(dist>4)beginDrag(ev.clientX,ev.clientY); else return; }
+      ev.preventDefault();
+      moveGhost(ev.clientX,ev.clientY);
+      const col=highlight(ev.clientX,ev.clientY); if(col)st.lastCol=col.dataset.stage;
+      computeAuto(ev.clientX,ev.clientY);
+    }
+    function onUp(ev){
+      const s=stateRef.current; stateRef.current=null; teardown(ev);
+      if(s&&st.started){
+        window.__heftDragEnd=Date.now();
+        let ns=st.lastCol;
+        if(!ns){const col=highlight(ev.clientX,ev.clientY);if(col)ns=col.dataset.stage;}
+        document.querySelectorAll('.col').forEach(c=>c.setAttribute('data-over','false'));
+        if(ns&&ns!==st.stage){
+          if(ns==='done')fireConfetti(ev.clientX,ev.clientY,1);
+          setTasks(ts=>ts.map(t=>{if(t.id!==st.id)return t;if(ns==='done'){const subs=t.subtasks||[];const allDone=subs.length===0||subs.every(x=>x.done);return{...t,completed:true,stage:allDone?'done':'doing'};}return{...t,stage:ns,completed:false};}));
+        }
+        setDragId(null);
+      }
+    }
     function teardown(ev){
-      clearHold();
+      if(st.holdTimer){clearTimeout(st.holdTimer);st.holdTimer=null;}
       try{cap.releasePointerCapture(ev.pointerId);}catch(_){}
       window.removeEventListener('pointermove',onMove);
       window.removeEventListener('pointerup',onUp);
       window.removeEventListener('pointercancel',onUp);
-    }
-    function highlight(x,y){
-      document.querySelectorAll('[data-stage]').forEach(c=>c.setAttribute('data-over','false'));
-      if(ghostRef.current)ghostRef.current.style.display='none';
-      const el=document.elementFromPoint(x,y);
-      if(ghostRef.current)ghostRef.current.style.display='';
-      const col=el&&el.closest('[data-stage]');
-      if(col)col.setAttribute('data-over','true');
-      return col;
-    }
-    function onMove(ev){
-      const s=stateRef.current;if(!s)return;
-      const dx=ev.clientX-s.sx,dy=ev.clientY-s.sy;
-      const dist=Math.hypot(dx,dy);
-      // If touch moves past 8px before the hold arms it, it's a scroll — bail out cleanly.
-      if(!s.armed){
-        if(dist>8){stateRef.current=null;teardown(ev);}
-        return;
-      }
-      if(!s.started&&dist>3){
-        s.started=true;setDragId(s.id);
-        ev.preventDefault();
-        const g=document.createElement('div');
-        g.className='card-drag-ghost';g.textContent=s.name;
-        document.body.appendChild(g);ghostRef.current=g;
-        document.body.style.touchAction='none';
-        document.body.style.userSelect='none';
-      }
-      if(s.started){
-        ev.preventDefault();
-        if(ghostRef.current){
-          ghostRef.current.style.left=(ev.clientX-110)+'px';
-          ghostRef.current.style.top=(ev.clientY-22)+'px';
-        }
-        // Track the column under the pointer LIVE so the drop uses the last valid
-        // column the user was over — fixes the "revert to original column" bug.
-        const col=highlight(ev.clientX,ev.clientY);
-        if(col)s.lastCol=col.dataset.stage;
-      }
-    }
-    function onUp(ev){
-      const s=stateRef.current;stateRef.current=null;
-      teardown(ev);
-      document.body.style.touchAction='';document.body.style.userSelect='';
+      window.removeEventListener('touchmove',blockScroll,{passive:false});
+      stopAuto();
+      document.body.style.userSelect='';
+      document.body.classList.remove('heft-dragging');
+      if(card){card.style.opacity='';card.style.transition='';}
       if(ghostRef.current){ghostRef.current.remove();ghostRef.current=null;}
-      document.querySelectorAll('[data-stage]').forEach(c=>c.setAttribute('data-over','false'));
-      if(s&&s.started){
-        window.__heftDragEnd=Date.now();
-        let ns=s.lastCol;
-        if(!ns){const col=highlight(ev.clientX,ev.clientY);if(col)ns=col.dataset.stage;}
-        document.querySelectorAll('[data-stage]').forEach(c=>c.setAttribute('data-over','false'));
-        // Dropping into Done follows the same subtask rule as the checkbox:
-        // mark complete, but stay parked (in progress) until every subtask is done.
-        if(ns){
-          if(ns==='done')fireConfetti(ev.clientX,ev.clientY,1);
-          setTasks(ts=>ts.map(t=>{if(t.id!==s.id)return t;if(ns==='done'){const subs=t.subtasks||[];const allDone=subs.length===0||subs.every(x=>x.done);return{...t,completed:true,stage:allDone?'done':'doing'};}return{...t,stage:ns,completed:false};}));
-        }
-        setDragId(null);
-      }
+      document.querySelectorAll('.col').forEach(c=>c.setAttribute('data-over','false'));
     }
     window.addEventListener('pointermove',onMove,{passive:false});
     window.addEventListener('pointerup',onUp);
@@ -2395,7 +2425,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.18.1';
+const HEFT_VERSION='0.19.0';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
@@ -3076,7 +3106,7 @@ function App({session}){
 
         {/* Bottom-right dock — secondary "Carry over" pill beside the primary "Add task" FAB */}
         <div className="fabdock">
-          {unfinished.length>0&&!query.trim()&&(focusKey<todayK||(focusKey===todayK&&new Date().getHours()>=17))&&(
+          {unfinished.length>0&&!query.trim()&&(focusKey<todayK||(focusKey===todayK&&new Date().getHours()>=17))&&!(showBanner||showPastBanner)&&(
             <button type="button" className="movepill" onClick={()=>setCarryOpen(true)} title={'Carry all unfinished tasks to '+carryLabel(targetDate)}>
               <Icon name="carryover" size={17}/>Carry over
             </button>
