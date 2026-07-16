@@ -6,39 +6,45 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Heft"/>
-<meta name="theme-color" content="#5C3D2E"/>
+<meta name="theme-color" content="#EFE7DA"/>
 <link rel="manifest" href="/manifest.json"/>
 <title>Heft</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
 /* ===== TOKENS ===== */
 :root {
+  /* Japandi journal type system: sans workhorse chrome, soft-serif headers,
+     typewriter entries, handwritten script for the big date. */
   --font-ui:'Hanken Grotesk',-apple-system,system-ui,sans-serif;
-  --font-display:'Bricolage Grotesque','Hanken Grotesk',sans-serif;
-  --w-light:#7FB069;--w-medium:#E6B450;--w-heavy:#D9744F;--w-extra:#5B9BD5;
+  --font-display:'Fraunces','Spectral',Georgia,serif;
+  --font-serif:'Fraunces','Spectral',Georgia,serif;
+  --font-mono:'Courier Prime','Courier New',ui-monospace,monospace;
+  --font-script:'Caveat','Segoe Script',cursive;
+  /* Wabi-sabi mood weights: sage, ochre, terracotta, dusty rose */
+  --w-light:#8B9E6B;--w-medium:#D3A24A;--w-heavy:#C4693F;--w-extra:#A98A86;
   --gap:10px;--colgap:12px;--cardpad:15px;--radius:13px;
 }
 [data-theme="light"]{
-  --page:oklch(0.925 0.014 74);--bg:oklch(0.966 0.012 80);
-  --surface:oklch(0.995 0.006 85);--surface-2:oklch(0.945 0.013 77);--surface-3:oklch(0.905 0.015 76);
-  --text:oklch(0.28 0.014 55);--text-dim:oklch(0.50 0.014 58);--text-faint:oklch(0.57 0.014 60);
-  --border:oklch(0.885 0.012 72);--border-strong:oklch(0.80 0.014 70);--w-none:oklch(0.80 0.014 70);
-  --accent:oklch(0.52 0.075 52);--accent-ink:#fbf7f1;
-  --danger:oklch(0.55 0.15 28);--overlay:rgba(36,28,20,0.42);
+  --page:oklch(0.905 0.02 74);--bg:oklch(0.955 0.016 78);
+  --surface:oklch(0.984 0.012 82);--surface-2:oklch(0.935 0.018 76);--surface-3:oklch(0.898 0.021 74);
+  --text:oklch(0.30 0.015 55);--text-dim:oklch(0.47 0.017 52);--text-faint:oklch(0.60 0.015 55);
+  --border:oklch(0.874 0.017 72);--border-strong:oklch(0.775 0.02 66);--w-none:oklch(0.775 0.02 66);
+  --accent:oklch(0.55 0.12 42);--accent-ink:#fbf4ea;
+  --danger:oklch(0.52 0.15 28);--overlay:rgba(44,33,22,0.42);
 }
 [data-theme="dark"]{
-  --page:oklch(0.155 0.006 60);--bg:oklch(0.205 0.008 60);
-  --surface:oklch(0.252 0.009 62);--surface-2:oklch(0.226 0.009 60);--surface-3:oklch(0.305 0.011 62);
-  --text:oklch(0.93 0.01 85);--text-dim:oklch(0.72 0.012 78);--text-faint:oklch(0.63 0.012 70);
-  --border:oklch(0.33 0.01 62);--border-strong:oklch(0.43 0.012 62);--w-none:oklch(0.46 0.012 62);
-  --accent:oklch(0.72 0.085 62);--accent-ink:#1c1710;
+  --page:oklch(0.185 0.008 58);--bg:oklch(0.205 0.01 58);
+  --surface:oklch(0.255 0.012 60);--surface-2:oklch(0.23 0.011 58);--surface-3:oklch(0.305 0.013 60);
+  --text:oklch(0.92 0.012 82);--text-dim:oklch(0.72 0.014 76);--text-faint:oklch(0.61 0.013 70);
+  --border:oklch(0.33 0.012 60);--border-strong:oklch(0.44 0.014 60);--w-none:oklch(0.46 0.014 60);
+  --accent:oklch(0.70 0.11 48);--accent-ink:#1e1810;
   --danger:oklch(0.70 0.13 32);--overlay:rgba(8,6,4,0.6);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{--bg:oklch(0.966 0.012 80);--text:oklch(0.28 0.014 55);background:var(--bg);}
-html[data-dark="true"]{--bg:oklch(0.205 0.008 60);--text:oklch(0.93 0.01 85);}
+html{--bg:oklch(0.955 0.016 78);--text:oklch(0.30 0.015 55);background:var(--bg);}
+html[data-dark="true"]{--bg:oklch(0.205 0.01 58);--text:oklch(0.92 0.012 82);}
 /* html/body pinned to the VISUAL viewport. Background paints edge-to-edge including
    the status-bar and home-indicator safe areas, so those regions never render as an
    empty colored gap on a home-screen PWA. */
@@ -868,6 +874,120 @@ html[data-dark="true"],html[data-dark="true"] body{background:oklch(0.17 0.008 6
   .card,.card:hover,.check,.check:hover,.fab,.fab:hover,.movepill,.chip,.tagchip,.datenav__arrow,.datebar__arrow,.apptop__gear{transition:none!important;transform:none!important;}
   .splash-bar{animation:none!important;}
 }
+
+/* ============================================================
+   HEFT V3 — JAPANDI JOURNAL LAYER
+   Retires the frosted-glass V2 skin for warm, matte paper.
+   Typewriter entries, soft-serif headers, a handwritten script
+   date, letterpress rubber-stamp labels, and a subtle paper
+   grain. Placed last so single-class rules win the cascade;
+   layout + spring interactions from earlier layers are kept.
+   ============================================================ */
+[data-theme="light"]{
+  --glass:var(--surface);--glass-strong:var(--surface);--glass-soft:var(--surface-2);
+  --glass-border:var(--border);--glass-edge:var(--border);
+  --glass-shadow:0 14px 30px -20px rgba(70,52,34,.30),0 2px 6px -3px rgba(70,52,34,.10);
+  --grain-blend:multiply;--grain-opacity:.055;
+}
+[data-theme="dark"]{
+  --glass:var(--surface);--glass-strong:var(--surface);--glass-soft:var(--surface-2);
+  --glass-border:var(--border);--glass-edge:var(--border);
+  --glass-shadow:0 18px 40px -20px rgba(0,0,0,.55),0 2px 6px -3px rgba(0,0,0,.35);
+  --grain-blend:overlay;--grain-opacity:.07;
+}
+
+/* flat parchment ground + fixed paper grain */
+#app{background:var(--bg);}
+html,body,html[data-dark="true"],html[data-dark="true"] body{background:var(--bg);}
+#app::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:170px 170px;opacity:var(--grain-opacity);mix-blend-mode:var(--grain-blend);}
+#root{background:transparent;}
+.appmain,.board{background:transparent;position:relative;z-index:1;}
+
+/* remove every backdrop blur; go matte */
+.apptop,.apptop--desk,.datebar,.apptop.mobile-only,.sidebar,.col,.lane,.card,.subcard,
+.card__subs,.sidesearch__input,.chip,.tagchip,.swatch,.modal__panel,.tplpop,.savetpl__panel,
+.subdel-panel,.crop-shell,.popmenu,.colsort__menu,.datepick__pop,.syncpill,.toast,.movepill,
+.zoomctl,.rollbanner,.card-drag-ghost,.onboard,.onboard-scrim,.modal-scrim,.input,.seg,
+.rollopts,.setgroup,.datenav__arrow,.datebar__arrow,.datebar__panel,.apptop__gear,
+.sidebar__toggle,.sidebar__sync{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
+
+/* top bars */
+.apptop,.apptop--desk,.datebar,.apptop.mobile-only{background:var(--bg);border-bottom:1px solid var(--border);box-shadow:none;}
+@media(max-width:479px){.apptop.mobile-only{background:var(--bg);}}
+.datenav__arrow,.datebar__arrow,.datebar__panel,.apptop__gear,.sidebar__toggle,.sidebar__sync{background:var(--surface);border:1px solid var(--border);border-radius:9px;}
+.apptop__viewtoggle{background:var(--surface-2);border:1px solid var(--border);}
+.viewtoggle__opt[data-on="true"]{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08);border-radius:7px;}
+
+/* sidebar */
+.sidebar{background:var(--bg);border-right:1px solid var(--border);}
+@media(max-width:479px){.sidebar{background:var(--bg);}}
+.sidesearch__input{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;}
+.sidesearch__input:focus{background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);}
+.chip,.tagchip,.swatch{background:var(--surface-2);border:1px solid var(--border);}
+
+/* kanban columns — paper wells */
+.col{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;box-shadow:none;}
+.col[data-over="true"]{background:color-mix(in srgb,var(--accent) 9%,var(--surface-2));box-shadow:inset 0 0 0 1.5px var(--accent);}
+.lane{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;}
+.col__count{background:var(--surface-3);border:1px solid var(--border);}
+
+/* task cards — index cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 0 color-mix(in srgb,var(--text) 5%,transparent);}
+.card:hover{border-color:var(--border-strong);box-shadow:var(--glass-shadow);}
+.card__rail{width:4px;border-radius:99px;margin:9px 0 9px 7px;background:var(--w);}
+.subcard{background:color-mix(in srgb,var(--w,var(--border)) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--w,var(--border)) 26%,var(--border));border-radius:11px;}
+.card__subs{background:var(--surface-2);border:1.5px solid var(--border);}
+
+/* modals, menus, pills — solid paper */
+.modal__panel,.tplpop,.savetpl__panel,.subdel-panel,.crop-shell,.onboard{background:var(--surface);border:1px solid var(--border-strong);box-shadow:var(--glass-shadow);}
+.popmenu,.colsort__menu,.datepick__pop{background:var(--surface);border:1px solid var(--border-strong);}
+.modal-scrim,.onboard-scrim{background:var(--overlay);}
+.syncpill,.movepill,.zoomctl,.card-drag-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text);box-shadow:var(--glass-shadow);}
+.toast{background:var(--text);color:var(--bg);border:0;}
+.input{background:var(--surface-2);border:1px solid var(--border);}
+.input:focus{background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);}
+.seg,.rollopts,.setgroup{background:var(--surface-2);border:1px solid var(--border);}
+.seg__opt[data-on="true"]{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.rollbanner{background:color-mix(in srgb,var(--accent) 7%,var(--surface));}
+
+/* ---------- typography ---------- */
+/* brand + headers → soft serif */
+.apptop__brandLname{font-family:var(--font-serif);font-weight:600;letter-spacing:-.01em;}
+.board-empty__title,.onboard__title,.subdel-panel__title,.tplpop__title,.lane__chip{font-family:var(--font-serif);}
+/* task + subtask entries → typewriter */
+.card__name,.card__notes,.subcard__name,.card-drag-ghost{font-family:var(--font-mono);}
+.card__name{font-weight:700;font-size:13.5px;letter-spacing:-.01em;}
+.subcard__name{font-weight:400;font-size:13px;}
+.card__notes{font-weight:400;}
+/* big date → handwritten script */
+.datenav__date{font-family:var(--font-script);font-weight:700;font-size:25px;line-height:1;letter-spacing:0;}
+.datebar__date{font-family:var(--font-script);font-weight:700;font-size:20px;line-height:1;letter-spacing:0;}
+/* stamped small-caps labels */
+.sidebar__lbl,.minical__dowcell,.habit__daylbl,.habit__streaklbl,.col__foot__w,.lane__legend{font-family:var(--font-mono);}
+/* column names → letterpress rubber-stamp */
+.col__name{font-family:var(--font-mono);display:inline-block;font-weight:700;font-size:10px;letter-spacing:.13em;color:var(--text-dim);
+  border:1.5px solid var(--border-strong);border-radius:4px;padding:3px 7px;background:transparent;text-shadow:0 1px 0 var(--surface);}
+.kanban .col:nth-child(1) .col__name{transform:rotate(-1.6deg);}
+.kanban .col:nth-child(2) .col__name{transform:rotate(1deg);}
+.kanban .col:nth-child(3) .col__name{transform:rotate(-.6deg);}
+.col__icon[data-stage="doing"]{color:var(--accent);}
+/* weight badge + "Today" → ink stamps */
+.card__wbadge{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+.datenav__today,.datebar__today{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.11em;font-weight:700;
+  color:var(--accent);border:1.5px solid var(--accent);border-radius:4px;padding:3px 8px;background:transparent;transform:rotate(-2deg);}
+/* FAB + primary CTAs → letterpress labels */
+.fab,.board-empty__cta{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:12.5px;}
+.fab{box-shadow:0 12px 26px -12px color-mix(in srgb,var(--accent) 60%,transparent),0 3px 8px -3px rgba(60,44,28,.22);}
+
+/* empty state → arrival moment with an oversized fleuron watermark */
+.board-empty{position:relative;overflow:hidden;}
+.board-empty::before{content:'\2767';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-serif);font-size:140px;line-height:1;color:color-mix(in srgb,var(--accent) 14%,transparent);pointer-events:none;z-index:0;}
+.board-empty>*{position:relative;z-index:1;}
+.board-empty__title{font-size:26px;font-weight:600;}
+.board-empty__sub em{font-family:var(--font-script);font-style:normal;font-size:1.35em;color:var(--accent);}
 </style>
 </head>
 <body>
@@ -904,8 +1024,8 @@ const SORTS=[{id:'created',label:'Date created'},{id:'alpha',label:'Alphabetical
 const FULL_MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const FULL_WEEKDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const WEEKDAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const FONT_SETS={Grotesque:{ui:"'Hanken Grotesk',system-ui,sans-serif",display:"'Bricolage Grotesque','Hanken Grotesk',sans-serif"},Editorial:{ui:"'Spectral',Georgia,serif",display:"'Spectral',Georgia,serif"},Geometric:{ui:"'Manrope',system-ui,sans-serif",display:"'Manrope',system-ui,sans-serif"}};
-const FONT_KEYS=['Grotesque','Editorial','Geometric'];
+const FONT_SETS={Paper:{ui:"'Hanken Grotesk',system-ui,sans-serif",display:"'Fraunces','Spectral',Georgia,serif"},Serif:{ui:"'Fraunces','Spectral',Georgia,serif",display:"'Fraunces','Spectral',Georgia,serif"},Type:{ui:"'Courier Prime','Courier New',monospace",display:"'Fraunces','Spectral',Georgia,serif"}};
+const FONT_KEYS=['Paper','Serif','Type'];
 const ACCENTS={Clay:{light:['oklch(0.52 0.075 52)','#fbf7f1'],dark:['oklch(0.72 0.085 62)','#1c1710'],swatch:'oklch(0.58 0.11 52)'},Sage:{light:['oklch(0.50 0.075 150)','#f1f7f0'],dark:['oklch(0.74 0.085 150)','#0f150e'],swatch:'oklch(0.58 0.10 150)'},Indigo:{light:['oklch(0.50 0.10 264)','#f1f3fb'],dark:['oklch(0.72 0.10 264)','#0f1119'],swatch:'oklch(0.55 0.13 264)'},Plum:{light:['oklch(0.50 0.105 330)','#fbf1f7'],dark:['oklch(0.74 0.10 330)','#170f14'],swatch:'oklch(0.56 0.13 330)'}};
 const ACCENT_KEYS=['Clay','Sage','Indigo','Plum'];
 const HABIT_ICONS=['book','dumbbell','droplet','heart','pen','note','sun','moon','cal','checkcircle'];
@@ -916,7 +1036,7 @@ function fireConfetti(x,y,intensity=1){
   if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   if(CELEBRATE==='off')return;
   const isDark=document.documentElement.getAttribute('data-dark')==='true';
-  const colors=isDark?['#8FBF7F','#D9B36A','#CE8A6A','#A79BC0','#B99C82']:['#7FB069','#E6B450','#D9744F','#9B8FB0','#5C3D2E'];
+  const colors=isDark?['#9DAE7B','#DCB262','#D08056','#B89A96','#B99C82']:['#8B9E6B','#D3A24A','#C4693F','#A98A86','#7A6A57'];
   const N=CELEBRATE==='subtle'?0:Math.round(16*intensity);
   for(let i=0;i<N;i++){
     const p=document.createElement('div');
@@ -979,7 +1099,7 @@ function Icon({name,size=16}){
     case 'collapseL':return <svg viewBox="0 0 24 24" style={s}><rect {...p} x="3" y="4" width="18" height="16" rx="2"/><path {...p} d="M9 4v16"/><path {...p} d="M16.5 9.5L14 12l2.5 2.5"/></svg>;
     case 'expandR':return <svg viewBox="0 0 24 24" style={s}><rect {...p} x="3" y="4" width="18" height="16" rx="2"/><path {...p} d="M9 4v16"/><path {...p} d="M13.5 9.5L16 12l-2.5 2.5"/></svg>;
     case 'search':return <svg viewBox="0 0 24 24" style={s}><circle {...p} cx="11" cy="11" r="7"/><path {...p} d="M20 20l-3.6-3.6"/></svg>;
-    case 'edit':return <svg viewBox="0 0 24 24" style={s}><path {...p} d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19l-4 1z"/><path {...p} d="M14.5 6.5l3 3"/></svg>;
+    case 'edit':return <svg viewBox="0 0 24 24" style={s}><path {...p} d="M3 21l1.3-4.2L15 6.1l3 3L7.2 19.7 3 21z"/><path {...p} d="M13.2 7.9l3 3"/><path {...p} d="M15 6.1l1.9-1.9a1.6 1.6 0 0 1 2.3 0l.7.7a1.6 1.6 0 0 1 0 2.3L18 9.1z"/><path {...p} d="M4.3 16.8l3 3"/></svg>;
     case 'grip':return <svg viewBox="0 0 24 24" style={s}><path {...p} d="M8 7h8M8 12h8M8 17h8"/></svg>;
     case 'subtasks':return <svg viewBox="0 0 24 24" style={s}><path {...p} d="M4 7h13M4 12h9M4 17h5"/></svg>;
     case 'book':return <svg viewBox="0 0 24 24" style={s}><path {...p} d="M12 6v14"/><path {...p} d="M12 6c-1.6-1.3-3.7-2-6-2v13c2.3 0 4.4.7 6 2"/><path {...p} d="M12 6c1.6-1.3 3.7-2 6-2v13c-2.3 0-4.4.7-6 2"/></svg>;
@@ -2065,7 +2185,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
               </div>
               <div className="field">
                 <span className="field__lbl">Typeface</span>
-                <div className="seg">{FONT_KEYS.map(k=><button key={k} type="button" className="seg__opt" data-on={typeface===k?'true':'false'} style={{fontFamily:FONT_SETS[k].display}} onClick={()=>setTypeface(k)}>{k}</button>)}</div>
+                <div className="seg">{FONT_KEYS.map(k=><button key={k} type="button" className="seg__opt" data-on={typeface===k?'true':'false'} style={{fontFamily:FONT_SETS[k].ui}} onClick={()=>setTypeface(k)}>{k}</button>)}</div>
               </div>
               <div className="field">
                 <span className="field__lbl">Color scheme</span>
@@ -2295,7 +2415,7 @@ function App({session}){
   const [activeTag,setActiveTag]=useState(null);
   const [query,setQuery]=useState('');
   const [profile,setProfile]=useState(local?.profile||(function(){const u=session&&session.user;const md=(u&&u.user_metadata)||{};return{first:md.first_name||'',last:md.last_name||'',email:(u&&u.email)||'',plan:'Personal',photo:null};})());
-  const [typeface,setTypeface]=useState(local?.typeface||'Grotesque');
+  const [typeface,setTypeface]=useState(local?.typeface||'Paper');
   const [accent,setAccent]=useState(local?.accent||'Clay');
   const [celebrate,setCelebrate]=useState(local?.celebrate||'full');
   useEffect(()=>{CELEBRATE=celebrate;},[celebrate]);
