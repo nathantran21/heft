@@ -11,17 +11,21 @@
 <title>Heft</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 /* ===== TOKENS ===== */
 :root {
-  /* Japandi journal type system: sans workhorse chrome, soft-serif headers,
-     typewriter entries, handwritten script for the big date. */
-  --font-ui:'Hanken Grotesk',-apple-system,system-ui,sans-serif;
-  --font-display:'Fraunces','Spectral',Georgia,serif;
-  --font-serif:'Fraunces','Spectral',Georgia,serif;
-  --font-mono:'Courier Prime','Courier New',ui-monospace,monospace;
-  --font-script:'Caveat','Segoe Script',cursive;
+  /* Minimal type system. ONE family drives the whole app; the typeface
+     setting remaps --font-ui + --font-display (and the aliases below) so a
+     switch propagates everywhere. Hierarchy comes from weight/size/tracking,
+     not from mixing loud faces. */
+  --font-ui:'Inter',-apple-system,system-ui,sans-serif;
+  --font-display:'Inter',-apple-system,system-ui,sans-serif;
+  /* aliases kept so any stray reference still follows the active typeface */
+  --font-serif:var(--font-display);
+  --font-mono:var(--font-ui);
+  --font-script:var(--font-display);
+  --tracking-caps:0.08em;
   /* Wabi-sabi mood weights: sage, ochre, terracotta, dusty rose */
   --w-light:#8B9E6B;--w-medium:#D3A24A;--w-heavy:#C4693F;--w-extra:#A98A86;
   --gap:10px;--colgap:12px;--cardpad:15px;--radius:13px;
@@ -981,48 +985,46 @@ button:focus:not(:focus-visible),input:focus:not(:focus-visible),textarea:focus:
 /* avoid iOS zoom-on-focus */
 @media(max-width:479px){.input,.sidesearch__input,.onboard__input{font-size:16px;}}
 
-/* ---------- typography ---------- */
-.apptop__brandLname{font-family:var(--font-serif);font-weight:600;letter-spacing:-.01em;}
-.board-empty__title,.onboard__title,.subdel-panel__title,.tplpop__title,.lane__chip,.carrydlg__title{font-family:var(--font-serif);}
-.card__name,.card__notes,.subcard__name,.card-drag-ghost{font-family:var(--font-mono);}
-.card__name{font-weight:700;font-size:13.5px;letter-spacing:-.01em;}
-.subcard__name{font-weight:400;font-size:13px;}
+/* ---------- typography (minimal, driven entirely by the typeface setting) ---------- */
+.apptop__brandLname{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;}
+.board-empty__title,.onboard__title,.subdel-panel__title,.tplpop__title,.lane__chip,.carrydlg__title{font-family:var(--font-display);letter-spacing:-.01em;}
+.card__name,.card__notes,.subcard__name,.card-drag-ghost{font-family:var(--font-ui);}
+.card__name{font-weight:600;font-size:13.5px;letter-spacing:-.005em;}
+.subcard__name{font-weight:450;font-size:13px;}
 .card__notes{font-weight:400;}
-.datenav__date{font-family:var(--font-script);font-weight:700;font-size:25px;line-height:1;letter-spacing:0;}
-.datebar__date{font-family:var(--font-script);font-weight:700;font-size:20px;line-height:1;letter-spacing:0;}
-.sidebar__lbl,.minical__dowcell,.habit__daylbl,.habit__streaklbl,.col__foot__w,.lane__legend{font-family:var(--font-mono);}
+.datenav__date{font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1;letter-spacing:-.01em;}
+.datebar__date{font-family:var(--font-display);font-weight:600;font-size:15px;line-height:1;letter-spacing:-.01em;}
+.sidebar__lbl,.minical__dowcell,.habit__daylbl,.habit__streaklbl,.col__foot__w,.lane__legend{font-family:var(--font-ui);}
 
-/* letterpress rubber stamps */
-.col__name{font-family:var(--font-mono);display:inline-block;font-weight:700;font-size:10px;letter-spacing:.13em;color:var(--text-dim);
-  border:1.5px solid var(--border-strong);border-radius:4px;padding:3px 7px;background:transparent;text-shadow:0 1px 0 var(--surface);}
-.kanban .col:nth-child(1) .col__name{transform:rotate(-1.6deg);}
-.kanban .col:nth-child(2) .col__name{transform:rotate(1deg);}
-.kanban .col:nth-child(3) .col__name{transform:rotate(-.6deg);}
+/* section labels — quiet tracked caps (no more per-column rubber stamps) */
+.col__name{font-family:var(--font-ui);display:inline-block;font-weight:700;font-size:11px;letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-dim);}
 .col__icon[data-stage="doing"]{color:var(--accent);}
 
-/* weight badges — ink stamps, not filled pills */
-.card__wbadge{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.07em;font-weight:700;font-size:9px;
-  color:color-mix(in srgb,var(--w) 58%,var(--text));background:color-mix(in srgb,var(--w) 10%,transparent);
-  border:1.2px solid color-mix(in srgb,var(--w) 55%,var(--border));border-radius:3px;padding:2px 6px;}
-.datenav__today,.datebar__today{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.11em;font-weight:700;
-  color:var(--accent);border:1.5px solid var(--accent);border-radius:4px;padding:3px 8px;background:transparent;transform:rotate(-2deg);}
-.card__tag{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;font-size:9.5px;border-radius:3px;background:transparent;}
-.fab,.board-empty__cta,.onboard__cta{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:12.5px;}
+/* weight badge — minimal outline chip */
+.card__wbadge{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:9px;
+  color:color-mix(in srgb,var(--w) 60%,var(--text));background:transparent;
+  border:1px solid color-mix(in srgb,var(--w) 50%,var(--border));border-radius:5px;padding:2px 6px;}
+.datenav__today,.datebar__today{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.09em;font-weight:700;font-size:10px;
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 55%,var(--border));border-radius:999px;padding:3px 9px;background:transparent;}
+.card__tag{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.07em;font-size:9.5px;border-radius:999px;background:transparent;}
+.fab,.board-empty__cta,.onboard__cta{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:12px;}
 .fab{box-shadow:0 12px 26px -12px color-mix(in srgb,var(--accent) 60%,transparent),0 3px 8px -3px rgba(60,44,28,.22);}
-.movepill{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:11.5px;color:var(--text-dim);box-shadow:0 6px 18px -10px rgba(60,44,28,.35);}
+.movepill{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:11px;color:var(--text-dim);box-shadow:0 6px 18px -10px rgba(60,44,28,.35);}
 
 /* tactile checkbox — pressed-paper feel */
 .check{border-width:1.6px;box-shadow:inset 0 1px 2px color-mix(in srgb,var(--text) 7%,transparent);}
 .check[data-stage="done"]{box-shadow:none;}
 .subcard__check{box-shadow:inset 0 1px 2px color-mix(in srgb,var(--text) 7%,transparent);}
 
-/* empty state — arrival moment with an oversized fleuron watermark */
+/* empty state — arrival moment with a slow-floating fleuron watermark */
 .board-empty{position:relative;overflow:hidden;}
-.board-empty::before{content:'\2767';position:absolute;top:6px;left:50%;transform:translateX(-50%);
-  font-family:var(--font-serif);font-size:140px;line-height:1;color:color-mix(in srgb,var(--accent) 14%,transparent);pointer-events:none;z-index:0;}
+.board-empty::before{content:'\2767';position:absolute;top:6px;left:50%;
+  font-family:var(--font-display);font-size:140px;line-height:1;color:color-mix(in srgb,var(--accent) 13%,transparent);pointer-events:none;z-index:0;
+  transform:translateX(-50%);animation:fleuronFloat 7s ease-in-out infinite;transform-origin:center;}
+@keyframes fleuronFloat{0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg);}50%{transform:translateX(-50%) translateY(-9px) rotate(3deg);}}
 .board-empty>*{position:relative;z-index:1;}
-.board-empty__title{font-size:26px;font-weight:600;}
-.board-empty__sub em{font-family:var(--font-script);font-style:normal;font-size:1.35em;color:var(--accent);}
+.board-empty__title{font-size:26px;font-weight:700;}
+.board-empty__sub em{font-family:var(--font-display);font-style:italic;font-size:1.05em;color:var(--accent);}
 
 /* ---------- arrival: login ---------- */
 .login{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px;background:var(--bg);overflow:hidden;}
@@ -1060,6 +1062,63 @@ button:focus:not(:focus-visible),input:focus:not(:focus-visible),textarea:focus:
 .stampveil.out{animation:stampFade .5s ease both;}
 @keyframes stampFade{to{opacity:0;}}
 @media(prefers-reduced-motion:reduce){.stampveil{display:none;}}
+
+/* ============================================================
+   MOTION LAYER — purposeful, restrained, reduced-motion safe.
+   Entrance choreography on mount; tactile press feedback; a
+   smooth active indicator on the view toggle.
+   ============================================================ */
+/* staggered card entrance as a day/view mounts (fill:backwards so
+   hover transforms still work once settled) */
+@keyframes cardIn{from{opacity:0;transform:translateY(11px) scale(.985);}to{opacity:1;transform:none;}}
+.col__body .card,.lane__body .card{animation:cardIn .44s cubic-bezier(.22,1,.36,1) backwards;}
+.col__body .card:nth-child(1),.lane__body .card:nth-child(1){animation-delay:.03s;}
+.col__body .card:nth-child(2),.lane__body .card:nth-child(2){animation-delay:.07s;}
+.col__body .card:nth-child(3),.lane__body .card:nth-child(3){animation-delay:.11s;}
+.col__body .card:nth-child(4),.lane__body .card:nth-child(4){animation-delay:.15s;}
+.col__body .card:nth-child(5),.lane__body .card:nth-child(5){animation-delay:.19s;}
+.col__body .card:nth-child(n+6),.lane__body .card:nth-child(n+6){animation-delay:.22s;}
+
+/* view + column entrance */
+@keyframes viewIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.kanban,.weightview{animation:viewIn .4s cubic-bezier(.22,1,.36,1) both;}
+@keyframes colIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.kanban .col{animation:colIn .46s cubic-bezier(.22,1,.36,1) backwards;}
+.kanban .col:nth-child(2){animation-delay:.06s;}
+.kanban .col:nth-child(3){animation-delay:.12s;}
+
+/* sidebar rows + habits ease in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sidebar__content>.sidebar__group{animation:fadeUp .4s ease backwards;}
+.sidebar__content>.sidebar__group:nth-child(2){animation-delay:.05s;}
+.sidebar__content>.sidebar__group:nth-child(3){animation-delay:.1s;}
+.sidebar__content>.sidebar__group:nth-child(4){animation-delay:.15s;}
+
+/* view toggle: smooth crossfade of the active pill */
+.viewtoggle__opt{transition:color .22s ease,background .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease;}
+.datenav__date,.datebar__date{transition:opacity .2s ease;}
+
+/* tactile press feedback across controls */
+.fab:active,.movepill:active,.board-empty__cta:active,.onboard__cta:active,.login__cta:active,
+.chip:active,.tagchip:active,.datenav__arrow:active,.datebar__arrow:active,.datebar__panel:active,
+.apptop__gear:active,.apptop__avatar:active,.sidebar__toggle:active,.sidebar__sync:active,
+.col__add:active,.viewtoggle__opt:active,.btn:active,.qdate__btn:active,.minical__arrow:active,
+.datenav__today:active,.datebar__today:active{transform:scale(.94);}
+.card__subs:active{transform:scale(.97);}
+.fab,.movepill,.chip,.tagchip,.datenav__arrow,.datebar__arrow,.datebar__panel,.apptop__gear,
+.apptop__avatar,.sidebar__toggle,.sidebar__sync,.col__add,.btn,.qdate__btn,.minical__arrow,
+.datenav__today,.datebar__today,.card__subs,.board-empty__cta,.onboard__cta,.login__cta{transition:transform .13s cubic-bezier(.34,1.56,.64,1),filter .15s ease,border-color .15s ease,background .15s ease,color .15s ease,box-shadow .2s ease;}
+
+/* completing the day: the whole board exhales once */
+@keyframes boardExhale{0%{transform:scale(1);}40%{transform:scale(.992);}100%{transform:scale(1);}}
+.board[data-justcompleted="true"]{animation:boardExhale .6s ease;}
+
+@media(prefers-reduced-motion:reduce){
+  .col__body .card,.lane__body .card,.kanban,.weightview,.kanban .col,
+  .sidebar__content>.sidebar__group,.board-empty::before,.board[data-justcompleted="true"]{animation:none!important;}
+  .fab:active,.movepill:active,.chip:active,.viewtoggle__opt:active,.btn:active,
+  .datenav__arrow:active,.datebar__arrow:active,.apptop__gear:active,.card__subs:active{transform:none!important;}
+}
 </style>
 </head>
 <body>
@@ -1096,8 +1155,13 @@ const SORTS=[{id:'created',label:'Date created'},{id:'alpha',label:'Alphabetical
 const FULL_MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const FULL_WEEKDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const WEEKDAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const FONT_SETS={Paper:{ui:"'Hanken Grotesk',system-ui,sans-serif",display:"'Fraunces','Spectral',Georgia,serif"},Serif:{ui:"'Fraunces','Spectral',Georgia,serif",display:"'Fraunces','Spectral',Georgia,serif"},Type:{ui:"'Courier Prime','Courier New',monospace",display:"'Fraunces','Spectral',Georgia,serif"}};
-const FONT_KEYS=['Paper','Serif','Type'];
+const FONT_SETS={
+  Minimal:{ui:"'Inter',-apple-system,system-ui,sans-serif",display:"'Inter',-apple-system,system-ui,sans-serif"},
+  Grotesk:{ui:"'Space Grotesk',system-ui,sans-serif",display:"'Space Grotesk',system-ui,sans-serif"},
+  Serif:{ui:"'Fraunces',Georgia,serif",display:"'Fraunces',Georgia,serif"},
+  Mono:{ui:"'Courier Prime','Courier New',monospace",display:"'Courier Prime','Courier New',monospace"}
+};
+const FONT_KEYS=['Minimal','Grotesk','Serif','Mono'];
 const ACCENTS={Clay:{light:['oklch(0.55 0.12 42)','#fbf4ea'],dark:['oklch(0.70 0.11 48)','#1e1810'],swatch:'oklch(0.58 0.13 42)'},Sage:{light:['oklch(0.50 0.07 145)','#f1f7f0'],dark:['oklch(0.72 0.08 145)','#0f150e'],swatch:'oklch(0.56 0.09 145)'},Ochre:{light:['oklch(0.58 0.105 84)','#2a2113'],dark:['oklch(0.76 0.105 84)','#241a08'],swatch:'oklch(0.68 0.115 84)'},Ink:{light:['oklch(0.35 0.02 60)','#f2ece0'],dark:['oklch(0.80 0.015 75)','#221c14'],swatch:'oklch(0.40 0.02 60)'}};
 const ACCENT_KEYS=['Clay','Sage','Ochre','Ink'];
 const HABIT_ICONS=['book','dumbbell','droplet','heart','pen','note','sun','moon','cal','checkcircle'];
@@ -2332,7 +2396,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.17.0';
+const HEFT_VERSION='0.18.0';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
@@ -2495,8 +2559,8 @@ function App({session}){
   const [activeTag,setActiveTag]=useState(null);
   const [query,setQuery]=useState('');
   const [profile,setProfile]=useState(local?.profile||(function(){const u=session&&session.user;const md=(u&&u.user_metadata)||{};return{first:md.first_name||'',last:md.last_name||'',email:(u&&u.email)||'',plan:'Personal',photo:null};})());
-  const [typeface,setTypeface]=useState(local?.typeface||'Paper');
-  const [accent,setAccent]=useState(local?.accent||'Clay');
+  const [typeface,setTypeface]=useState(FONT_SETS[local?.typeface]?local.typeface:'Minimal');
+  const [accent,setAccent]=useState(ACCENTS[local?.accent]?local.accent:'Clay');
   const [celebrate,setCelebrate]=useState(local?.celebrate||'full');
   useEffect(()=>{CELEBRATE=celebrate;},[celebrate]);
   // One Escape closes whatever is on top — modals, menus, dialogs.
@@ -2568,7 +2632,7 @@ function App({session}){
     if(typeof s.dark==='boolean')setDark(s.dark);
     if(s.celebrate)setCelebrate(s.celebrate);
     if(s.view)setView(s.view);
-    if(s.typeface)setTypeface(s.typeface);
+    if(s.typeface)setTypeface(FONT_SETS[s.typeface]?s.typeface:'Minimal');
     if(s.accent)setAccent(s.accent);
     if(s.sidebarWidth)setSidebarWidth(s.sidebarWidth);
     if(s.sort)setSort(s.sort);
@@ -2770,9 +2834,15 @@ function App({session}){
 
   // apply typeface — update root vars so every element on the page gets the new font
   useEffect(()=>{
-    const f=FONT_SETS[typeface];if(!f)return;
-    document.documentElement.style.setProperty('--font-ui',f.ui);
-    document.documentElement.style.setProperty('--font-display',f.display);
+    const f=FONT_SETS[typeface]||FONT_SETS.Minimal;
+    const root=document.documentElement.style;
+    // Drive EVERY font token from the setting so the switch propagates app-wide
+    // (this was the bug: --font-mono/serif/script were never updated).
+    root.setProperty('--font-ui',f.ui);
+    root.setProperty('--font-display',f.display);
+    root.setProperty('--font-serif',f.display);
+    root.setProperty('--font-mono',f.ui);
+    root.setProperty('--font-script',f.display);
   },[typeface]);
 
   // Decide onboarding once, after the initial cloud pull settles. Anyone with
