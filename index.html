@@ -1586,10 +1586,46 @@ function Checkbox({stage,completed,onCycle,weight}){
     </button>
   );
 }
+// Grip-based pointer reorder for subtask lists — mouse + touch, geometric hit-testing + edge auto-scroll.
+function useGripReorder(reorder){
+  const [st,setSt]=useState(null);
+  const ref=useRef(null);
+  const raf=useRef(0);
+  const auto=useRef({el:null,dy:0});
+  const gripDown=useCallback((e,index,itemSel)=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    e.preventDefault(); e.stopPropagation();
+    const grip=e.currentTarget;
+    try{grip.setPointerCapture(e.pointerId);}catch(_){}
+    const s={from:index,over:index,ly:e.clientY};
+    ref.current=s; setSt({from:index,over:index});
+    document.body.classList.add('heft-dragging');
+    function block(ev){ if(ref.current) ev.preventDefault(); }
+    window.addEventListener('touchmove',block,{passive:false});
+    function items(){ const first=grip.closest(itemSel); const p=first&&first.parentElement; return p?[...p.children].filter(c=>c.matches&&c.matches(itemSel)):[]; }
+    function overAt(y){ const its=items(); for(let k=0;k<its.length;k++){ const r=its[k].getBoundingClientRect(); if(y<r.top+r.height/2) return k; } return its.length?its.length-1:null; }
+    function findScroller(){ let el=grip.closest(itemSel); el=el&&el.parentElement; while(el&&el!==document.body){ const cs=getComputedStyle(el); if(/(auto|scroll)/.test(cs.overflowY)&&el.scrollHeight>el.clientHeight+2)return el; el=el.parentElement; } return null; }
+    const sc=findScroller();
+    function tick(){ const a=auto.current; if(a.el&&a.dy){ a.el.scrollTop+=a.dy; const s2=ref.current; if(s2){ const o=overAt(s2.ly); if(o!=null&&o!==s2.over){s2.over=o; setSt({from:s2.from,over:o});} } } raf.current=requestAnimationFrame(tick); }
+    raf.current=requestAnimationFrame(tick);
+    function edge(y){ auto.current.el=sc; auto.current.dy=0; if(!sc)return; const r=sc.getBoundingClientRect(); const E=44; if(y<r.top+E)auto.current.dy=-9; else if(y>r.bottom-E)auto.current.dy=9; }
+    function move(ev){ const s2=ref.current; if(!s2)return; ev.preventDefault(); s2.ly=ev.clientY; const o=overAt(ev.clientY); if(o!=null&&o!==s2.over){s2.over=o; setSt({from:s2.from,over:o});} edge(ev.clientY); }
+    function up(ev){ const s2=ref.current; ref.current=null;
+      cancelAnimationFrame(raf.current); raf.current=0; auto.current={el:null,dy:0};
+      window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); window.removeEventListener('pointercancel',up); window.removeEventListener('touchmove',block,{passive:false});
+      document.body.classList.remove('heft-dragging');
+      try{grip.releasePointerCapture(ev.pointerId);}catch(_){}
+      if(s2&&s2.over!=null&&s2.from!==s2.over) reorder(s2.from,s2.over);
+      setSt(null);
+    }
+    window.addEventListener('pointermove',move,{passive:false});
+    window.addEventListener('pointerup',up); window.addEventListener('pointercancel',up);
+  },[reorder]);
+  return [st,gripDown];
+}
 function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubToggle,onSubReorder,onSubDelete,defaultExpanded}){
   const [expanded,setExpanded]=useState(defaultExpanded!==false);
-  const [subDrag,setSubDrag]=useState(null);
-  const [subOver,setSubOver]=useState(null);
+  const [subSt,subGrip]=useGripReorder(onSubReorder);
   const [pendingDelete,setPendingDelete]=useState(null);
   const done=task.completed||task.stage==='done';const weight=task.weight||'none';
   const pendingSubs=done&&task.stage!=='done'&&(task.subtasks||[]).some(s=>!s.done);
@@ -1617,20 +1653,15 @@ function TaskCard({task,onToggle,onCycle,onOpen,draggable,onPointerDown,onSubTog
       {expanded&&(task.subtasks||[]).length>0&&(
         <div className="subtree">
           {(task.subtasks||[]).map((s,i)=>(
-            <div key={s.id} className="subtree__item" data-dragging={subDrag===i?'true':'false'} data-droptarget={subOver===i&&subDrag!==null&&subDrag!==i?'true':'false'}
-              onDragOver={(e)=>{if(subDrag!==null&&subDrag!==i){e.preventDefault();e.dataTransfer.dropEffect='move';if(subOver!==i)setSubOver(i);}}}
-              onDragLeave={()=>{if(subOver===i)setSubOver(null);}}
-              onDrop={(e)=>{if(subDrag!==null&&subDrag!==i){e.preventDefault();onSubReorder&&onSubReorder(subDrag,i);}setSubDrag(null);setSubOver(null);}}>
-              <div className="subcard" data-done={s.done?'true':'false'} draggable="true"
-                style={{'--w':`var(--w-${weight})`}}
-                onDragStart={(e)=>{e.stopPropagation();e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','sub');setSubDrag(i);}}
-                onDragEnd={()=>{setSubDrag(null);setSubOver(null);}}>
+            <div key={s.id} className="subtree__item" data-subindex={i} data-dragging={subSt&&subSt.from===i?'true':'false'} data-droptarget={subSt&&subSt.over===i&&subSt.from!==i?'true':'false'}>
+              <div className="subcard" data-done={s.done?'true':'false'}
+                style={{'--w':`var(--w-${weight})`}}>
                 <button type="button" className="subcard__check" aria-label={(s.done?'Uncheck subtask: ':'Complete subtask: ')+s.name} data-done={s.done?'true':'false'} onClick={(e)=>{e.stopPropagation();onSubToggle&&onSubToggle(s.id,e);}}>{s.done&&<Icon name="check" size={11}/>}</button>
                 <span className="subcard__name">{s.name}</span>
                 <button type="button" className="subcard__trash" title="Delete subtask" onClick={(e)=>{e.stopPropagation();setPendingDelete(s);}}>
                   <Icon name="trash" size={14}/>
                 </button>
-                <span className="subcard__grip" title="Drag to reorder"><Icon name="grip" size={16}/></span>
+                <span className="subcard__grip" title="Drag to reorder" onPointerDown={(e)=>subGrip(e,i,'.subtree__item')} style={{touchAction:'none',cursor:'grab'}}><Icon name="grip" size={16}/></span>
               </div>
             </div>
           ))}
@@ -1925,7 +1956,7 @@ function TaskModal({initial,tags:initTags,onSave,onDelete,onClose,onDuplicate,on
   const [tags,setTags]=useState(initTags||[]);
   const [addingTag,setAddingTag]=useState(false);
   const [tagDraft,setTagDraft]=useState('');
-  const [dragIdx,setDragIdx]=useState(null);
+  const [subSt2,subGrip2]=useGripReorder(moveSub);
   function addSub(){const v=subDraft.trim();if(!v)return;if(subtasks.length>=10)return;setSubtasks(arr=>[...arr,{id:uid(),name:v,done:false}]);setSubDraft('');if(subInputRef.current)subInputRef.current.focus();}
   function commitTag(){const v=tagDraft.trim();if(v){setTags(t=>t.includes(v)?t:[...t,v]);setTag(v);}setTagDraft('');setAddingTag(false);}
   const [confirmTagDel,setConfirmTagDel]=useState(null);
@@ -1963,8 +1994,8 @@ function TaskModal({initial,tags:initTags,onSave,onDelete,onClose,onDuplicate,on
             {subtasks.length>0&&(
               <div className="subedit">
                 {subtasks.map((s,i)=>(
-                  <div className="subedit__row" key={s.id} data-done={s.done?'true':'false'} data-dragging={dragIdx===i?'true':'false'} onDragOver={(e)=>{if(dragIdx!==null){e.preventDefault();}}} onDrop={(e)=>{if(dragIdx!==null){e.preventDefault();moveSub(dragIdx,i);setDragIdx(null);}}}>
-                    <span className="subedit__grip" draggable="true" onDragStart={(e)=>{e.dataTransfer.effectAllowed='move';setDragIdx(i);}} onDragEnd={()=>setDragIdx(null)}><Icon name="grip" size={15}/></span>
+                  <div className="subedit__row" key={s.id} data-subindex={i} data-done={s.done?'true':'false'} data-dragging={subSt2&&subSt2.from===i?'true':'false'} data-over={subSt2&&subSt2.over===i&&subSt2.from!==i?'true':'false'}>
+                    <span className="subedit__grip" onPointerDown={(e)=>subGrip2(e,i,'.subedit__row')} style={{touchAction:'none',cursor:'grab'}}><Icon name="grip" size={15}/></span>
                     <button type="button" className="subedit__check" data-done={s.done?'true':'false'} onClick={()=>setSubtasks(arr=>arr.map(x=>x.id===s.id?{...x,done:!x.done}:x))}><Icon name="check" size={11}/></button>
                     <input className="subedit__input" value={s.name} onChange={(e)=>setSubtasks(arr=>arr.map(x=>x.id===s.id?{...x,name:e.target.value}:x))}/>
                     <button type="button" className="subedit__del" onClick={()=>setSubtasks(arr=>arr.filter(x=>x.id!==s.id))}><Icon name="x" size={14}/></button>
@@ -2425,7 +2456,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.19.0';
+const HEFT_VERSION='0.19.1';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
