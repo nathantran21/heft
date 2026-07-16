@@ -876,24 +876,27 @@ html[data-dark="true"],html[data-dark="true"] body{background:oklch(0.17 0.008 6
 }
 
 /* ============================================================
-   HEFT V3 — JAPANDI JOURNAL LAYER
-   Retires the frosted-glass V2 skin for warm, matte paper.
-   Typewriter entries, soft-serif headers, a handwritten script
-   date, letterpress rubber-stamp labels, and a subtle paper
-   grain. Placed last so single-class rules win the cascade;
-   layout + spring interactions from earlier layers are kept.
+   HEFT V3 — JAPANDI JOURNAL DESIGN SYSTEM
+   One coherent skin: warm parchment ground with paper grain,
+   matte "index card" surfaces, typewriter entries, soft-serif
+   headers, a handwritten script date, and letterpress rubber
+   stamps for labels/badges. Spring micro-interactions from the
+   motion layer are kept. Placed last: single-class rules here
+   are the visual authority.
    ============================================================ */
 [data-theme="light"]{
   --glass:var(--surface);--glass-strong:var(--surface);--glass-soft:var(--surface-2);
   --glass-border:var(--border);--glass-edge:var(--border);
   --glass-shadow:0 14px 30px -20px rgba(70,52,34,.30),0 2px 6px -3px rgba(70,52,34,.10);
   --grain-blend:multiply;--grain-opacity:.055;
+  --ring:color-mix(in srgb,var(--accent) 45%,transparent);
 }
 [data-theme="dark"]{
   --glass:var(--surface);--glass-strong:var(--surface);--glass-soft:var(--surface-2);
   --glass-border:var(--border);--glass-edge:var(--border);
   --glass-shadow:0 18px 40px -20px rgba(0,0,0,.55),0 2px 6px -3px rgba(0,0,0,.35);
   --grain-blend:overlay;--grain-opacity:.07;
+  --ring:color-mix(in srgb,var(--accent) 55%,transparent);
 }
 
 /* flat parchment ground + fixed paper grain */
@@ -904,6 +907,16 @@ html,body,html[data-dark="true"],html[data-dark="true"] body{background:var(--bg
   background-size:170px 170px;opacity:var(--grain-opacity);mix-blend-mode:var(--grain-blend);}
 #root{background:transparent;}
 .appmain,.board{background:transparent;position:relative;z-index:1;}
+
+/* warm text selection + focus ring (a11y) */
+::selection{background:color-mix(in srgb,var(--accent) 26%,transparent);}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:4px;}
+button:focus:not(:focus-visible),input:focus:not(:focus-visible),textarea:focus:not(:focus-visible){outline:none;}
+
+/* warm thin scrollbars on internal scrollers */
+.col__body::-webkit-scrollbar,.board::-webkit-scrollbar{width:8px;height:8px;}
+.col__body::-webkit-scrollbar-thumb,.board::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--text) 14%,transparent);border-radius:99px;border:2px solid transparent;background-clip:content-box;}
+.col__body::-webkit-scrollbar-track,.board::-webkit-scrollbar-track{background:transparent;}
 
 /* remove every backdrop blur; go matte */
 .apptop,.apptop--desk,.datebar,.apptop.mobile-only,.sidebar,.col,.lane,.card,.subcard,
@@ -927,67 +940,126 @@ html,body,html[data-dark="true"],html[data-dark="true"] body{background:var(--bg
 .sidesearch__input:focus{background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);}
 .chip,.tagchip,.swatch{background:var(--surface-2);border:1px solid var(--border);}
 
-/* kanban columns — paper wells */
+/* kanban columns — paper wells with air */
 .col{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;box-shadow:none;}
 .col[data-over="true"]{background:color-mix(in srgb,var(--accent) 9%,var(--surface-2));box-shadow:inset 0 0 0 1.5px var(--accent);}
 .lane{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;}
-.col__count{background:var(--surface-3);border:1px solid var(--border);}
+.col__count{background:var(--surface-3);border:1px solid var(--border);font-family:var(--font-mono);}
+@media(min-width:900px){
+  .board{padding:22px 26px;}
+  .kanban{gap:16px;}
+}
 
 /* task cards — index cards */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 0 color-mix(in srgb,var(--text) 5%,transparent);}
 .card:hover{border-color:var(--border-strong);box-shadow:var(--glass-shadow);}
 .card__rail{width:4px;border-radius:99px;margin:9px 0 9px 7px;background:var(--w);}
-.subcard{background:color-mix(in srgb,var(--w,var(--border)) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--w,var(--border)) 26%,var(--border));border-radius:11px;}
-.card__subs{background:var(--surface-2);border:1.5px solid var(--border);}
+.card__subs{background:transparent;border:1.5px solid var(--border);color:var(--text-faint);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;padding:4px 10px 4px 8px;}
+.card__subs:hover{border-color:var(--border-strong);color:var(--text-dim);background:var(--surface-2);}
+.card__subs[data-expanded="true"]{background:transparent;border-color:color-mix(in srgb,var(--w) 55%,var(--border));color:var(--text-dim);}
+
+/* subtask thread — a clean ruled ledger, not slabs */
+.subtree{padding-left:6px;}
+.subtree__item::before{width:1px;background:var(--border-strong);}
+.subtree__item::after{height:1px;background:var(--border-strong);}
+.subcard{background:var(--surface);border:1px solid var(--border);border-left:3px solid color-mix(in srgb,var(--w,var(--border)) 55%,transparent);border-radius:9px;padding:10px 12px;gap:10px;}
+.subcard:hover{border-color:var(--border-strong);border-left-color:var(--w,var(--border-strong));box-shadow:none;}
+.subcard__check{border-radius:3px;}
+.subcard__check[data-done="true"]{background:transparent;border-color:color-mix(in srgb,var(--w,var(--accent)) 70%,var(--border));color:color-mix(in srgb,var(--w,var(--accent)) 80%,var(--text));}
 
 /* modals, menus, pills — solid paper */
 .modal__panel,.tplpop,.savetpl__panel,.subdel-panel,.crop-shell,.onboard{background:var(--surface);border:1px solid var(--border-strong);box-shadow:var(--glass-shadow);}
 .popmenu,.colsort__menu,.datepick__pop{background:var(--surface);border:1px solid var(--border-strong);}
 .modal-scrim,.onboard-scrim{background:var(--overlay);}
-.syncpill,.movepill,.zoomctl,.card-drag-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text);box-shadow:var(--glass-shadow);}
+.syncpill,.zoomctl,.card-drag-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text);box-shadow:var(--glass-shadow);}
 .toast{background:var(--text);color:var(--bg);border:0;}
 .input{background:var(--surface-2);border:1px solid var(--border);}
 .input:focus{background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);}
 .seg,.rollopts,.setgroup{background:var(--surface-2);border:1px solid var(--border);}
 .seg__opt[data-on="true"]{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08);}
 .rollbanner{background:color-mix(in srgb,var(--accent) 7%,var(--surface));}
+/* avoid iOS zoom-on-focus */
+@media(max-width:479px){.input,.sidesearch__input,.onboard__input{font-size:16px;}}
 
 /* ---------- typography ---------- */
-/* brand + headers → soft serif */
 .apptop__brandLname{font-family:var(--font-serif);font-weight:600;letter-spacing:-.01em;}
-.board-empty__title,.onboard__title,.subdel-panel__title,.tplpop__title,.lane__chip{font-family:var(--font-serif);}
-/* task + subtask entries → typewriter */
+.board-empty__title,.onboard__title,.subdel-panel__title,.tplpop__title,.lane__chip,.carrydlg__title{font-family:var(--font-serif);}
 .card__name,.card__notes,.subcard__name,.card-drag-ghost{font-family:var(--font-mono);}
 .card__name{font-weight:700;font-size:13.5px;letter-spacing:-.01em;}
 .subcard__name{font-weight:400;font-size:13px;}
 .card__notes{font-weight:400;}
-/* big date → handwritten script */
 .datenav__date{font-family:var(--font-script);font-weight:700;font-size:25px;line-height:1;letter-spacing:0;}
 .datebar__date{font-family:var(--font-script);font-weight:700;font-size:20px;line-height:1;letter-spacing:0;}
-/* stamped small-caps labels */
 .sidebar__lbl,.minical__dowcell,.habit__daylbl,.habit__streaklbl,.col__foot__w,.lane__legend{font-family:var(--font-mono);}
-/* column names → letterpress rubber-stamp */
+
+/* letterpress rubber stamps */
 .col__name{font-family:var(--font-mono);display:inline-block;font-weight:700;font-size:10px;letter-spacing:.13em;color:var(--text-dim);
   border:1.5px solid var(--border-strong);border-radius:4px;padding:3px 7px;background:transparent;text-shadow:0 1px 0 var(--surface);}
 .kanban .col:nth-child(1) .col__name{transform:rotate(-1.6deg);}
 .kanban .col:nth-child(2) .col__name{transform:rotate(1deg);}
 .kanban .col:nth-child(3) .col__name{transform:rotate(-.6deg);}
 .col__icon[data-stage="doing"]{color:var(--accent);}
-/* weight badge + "Today" → ink stamps */
-.card__wbadge{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+
+/* weight badges — ink stamps, not filled pills */
+.card__wbadge{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.07em;font-weight:700;font-size:9px;
+  color:color-mix(in srgb,var(--w) 58%,var(--text));background:color-mix(in srgb,var(--w) 10%,transparent);
+  border:1.2px solid color-mix(in srgb,var(--w) 55%,var(--border));border-radius:3px;padding:2px 6px;}
 .datenav__today,.datebar__today{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.11em;font-weight:700;
   color:var(--accent);border:1.5px solid var(--accent);border-radius:4px;padding:3px 8px;background:transparent;transform:rotate(-2deg);}
-/* FAB + primary CTAs → letterpress labels */
-.fab,.board-empty__cta{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:12.5px;}
+.card__tag{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;font-size:9.5px;border-radius:3px;background:transparent;}
+.fab,.board-empty__cta,.onboard__cta{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:12.5px;}
 .fab{box-shadow:0 12px 26px -12px color-mix(in srgb,var(--accent) 60%,transparent),0 3px 8px -3px rgba(60,44,28,.22);}
+.movepill{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:11.5px;color:var(--text-dim);box-shadow:0 6px 18px -10px rgba(60,44,28,.35);}
 
-/* empty state → arrival moment with an oversized fleuron watermark */
+/* tactile checkbox — pressed-paper feel */
+.check{border-width:1.6px;box-shadow:inset 0 1px 2px color-mix(in srgb,var(--text) 7%,transparent);}
+.check[data-stage="done"]{box-shadow:none;}
+.subcard__check{box-shadow:inset 0 1px 2px color-mix(in srgb,var(--text) 7%,transparent);}
+
+/* empty state — arrival moment with an oversized fleuron watermark */
 .board-empty{position:relative;overflow:hidden;}
 .board-empty::before{content:'\2767';position:absolute;top:6px;left:50%;transform:translateX(-50%);
   font-family:var(--font-serif);font-size:140px;line-height:1;color:color-mix(in srgb,var(--accent) 14%,transparent);pointer-events:none;z-index:0;}
 .board-empty>*{position:relative;z-index:1;}
 .board-empty__title{font-size:26px;font-weight:600;}
 .board-empty__sub em{font-family:var(--font-script);font-style:normal;font-size:1.35em;color:var(--accent);}
+
+/* ---------- arrival: login ---------- */
+.login{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px;background:var(--bg);overflow:hidden;}
+.login__hero{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:26px;text-align:center;}
+.login__brand{font-family:var(--font-serif);font-size:44px;font-weight:600;letter-spacing:-.02em;color:var(--text);margin:0;line-height:1;}
+.login__stamp{font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  border:1.5px solid var(--accent);border-radius:4px;padding:4px 10px;transform:rotate(-2deg);}
+.login__fleuron{position:absolute;top:-38px;left:50%;transform:translateX(-50%);font-family:var(--font-serif);font-size:150px;line-height:1;
+  color:color-mix(in srgb,var(--accent) 10%,transparent);pointer-events:none;z-index:0;}
+.login__card{position:relative;z-index:1;width:100%;max-width:340px;background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;
+  padding:22px 20px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--glass-shadow);}
+.login__input{font-size:14px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:11px 13px;width:100%;outline:none;font-family:var(--font-ui);box-sizing:border-box;transition:border-color .15s,background .15s,box-shadow .15s;}
+.login__input:focus{background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent);}
+.login__input::placeholder{color:var(--text-faint);}
+@media(max-width:479px){.login__input{font-size:16px;}}
+.login__cta{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.07em;font-size:12.5px;font-weight:700;color:var(--accent-ink);background:var(--accent);border:0;border-radius:9px;padding:13px 16px;width:100%;cursor:pointer;transition:filter .15s,transform .12s;}
+.login__cta:hover{filter:brightness(1.06);}
+.login__cta:active{transform:scale(.98);}
+.login__cta:disabled{opacity:.55;cursor:default;}
+.login__err{margin:0;font-size:12px;color:var(--danger);text-align:center;}
+.login__alt{margin:4px 0 0;text-align:center;font-size:12.5px;color:var(--text-dim);}
+.login__lnk{font-size:12.5px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;font-family:inherit;text-decoration:underline;text-underline-offset:2px;}
+.login__foot{position:relative;z-index:1;margin-top:22px;font-family:var(--font-script);font-size:19px;color:var(--text-faint);}
+
+/* splash tagline stamp */
+.splash__stamp{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);
+  border:1.5px solid var(--border-strong);border-radius:4px;padding:4px 10px;transform:rotate(-2deg);}
+
+/* day-complete — the stamp thunks down like ink on paper */
+.stampveil{position:fixed;inset:0;z-index:950;display:grid;place-items:center;pointer-events:none;}
+.stampveil__stamp{font-family:var(--font-mono);font-size:clamp(22px,5vw,34px);font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);border:4px double var(--accent);border-radius:8px;padding:14px 26px;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  transform:rotate(-6deg);animation:stampThunk .5s cubic-bezier(.2,1.4,.4,1) both;box-shadow:0 24px 60px -24px color-mix(in srgb,var(--accent) 45%,transparent);}
+@keyframes stampThunk{0%{opacity:0;transform:rotate(-6deg) scale(2.2);}60%{opacity:1;transform:rotate(-6deg) scale(.96);}100%{opacity:1;transform:rotate(-6deg) scale(1);}}
+.stampveil.out{animation:stampFade .5s ease both;}
+@keyframes stampFade{to{opacity:0;}}
+@media(prefers-reduced-motion:reduce){.stampveil{display:none;}}
 </style>
 </head>
 <body>
@@ -1026,8 +1098,8 @@ const FULL_WEEKDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday'
 const WEEKDAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const FONT_SETS={Paper:{ui:"'Hanken Grotesk',system-ui,sans-serif",display:"'Fraunces','Spectral',Georgia,serif"},Serif:{ui:"'Fraunces','Spectral',Georgia,serif",display:"'Fraunces','Spectral',Georgia,serif"},Type:{ui:"'Courier Prime','Courier New',monospace",display:"'Fraunces','Spectral',Georgia,serif"}};
 const FONT_KEYS=['Paper','Serif','Type'];
-const ACCENTS={Clay:{light:['oklch(0.52 0.075 52)','#fbf7f1'],dark:['oklch(0.72 0.085 62)','#1c1710'],swatch:'oklch(0.58 0.11 52)'},Sage:{light:['oklch(0.50 0.075 150)','#f1f7f0'],dark:['oklch(0.74 0.085 150)','#0f150e'],swatch:'oklch(0.58 0.10 150)'},Indigo:{light:['oklch(0.50 0.10 264)','#f1f3fb'],dark:['oklch(0.72 0.10 264)','#0f1119'],swatch:'oklch(0.55 0.13 264)'},Plum:{light:['oklch(0.50 0.105 330)','#fbf1f7'],dark:['oklch(0.74 0.10 330)','#170f14'],swatch:'oklch(0.56 0.13 330)'}};
-const ACCENT_KEYS=['Clay','Sage','Indigo','Plum'];
+const ACCENTS={Clay:{light:['oklch(0.55 0.12 42)','#fbf4ea'],dark:['oklch(0.70 0.11 48)','#1e1810'],swatch:'oklch(0.58 0.13 42)'},Sage:{light:['oklch(0.50 0.07 145)','#f1f7f0'],dark:['oklch(0.72 0.08 145)','#0f150e'],swatch:'oklch(0.56 0.09 145)'},Ochre:{light:['oklch(0.58 0.105 84)','#2a2113'],dark:['oklch(0.76 0.105 84)','#241a08'],swatch:'oklch(0.68 0.115 84)'},Ink:{light:['oklch(0.35 0.02 60)','#f2ece0'],dark:['oklch(0.80 0.015 75)','#221c14'],swatch:'oklch(0.40 0.02 60)'}};
+const ACCENT_KEYS=['Clay','Sage','Ochre','Ink'];
 const HABIT_ICONS=['book','dumbbell','droplet','heart','pen','note','sun','moon','cal','checkcircle'];
 let _seq=100; function uid(){return 'i'+Date.now().toString(36)+(++_seq).toString(36)+Math.random().toString(36).slice(2,6);}
 
@@ -1065,6 +1137,14 @@ function fireDayComplete(){
   if(CELEBRATE==='off')return;
   if(CELEBRATE==='subtle'){fireConfetti(window.innerWidth/2,window.innerHeight*0.38,1);return;}
   fireConfetti(window.innerWidth/2,window.innerHeight*0.38,2.4);
+  // letterpress moment: a rubber stamp thunks down over the board
+  if(!document.querySelector('.stampveil')){
+    const v=document.createElement('div');v.className='stampveil';
+    const s=document.createElement('div');s.className='stampveil__stamp';s.textContent='Day complete';
+    v.appendChild(s);document.body.appendChild(v);
+    setTimeout(()=>v.classList.add('out'),1500);
+    setTimeout(()=>v.remove(),2050);
+  }
 }
 
 // ===== HELPERS =====
@@ -2252,7 +2332,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.16.0-v2';
+const HEFT_VERSION='0.17.0';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
@@ -3040,31 +3120,29 @@ function LoginScreen(){
     }
     setBusy(false);
   }
-  const inp={fontSize:14,color:'var(--text)',background:'var(--bg)',border:'1px solid var(--border)',borderRadius:10,padding:'11px 13px',width:'100%',outline:'none',fontFamily:'var(--font-ui)',boxSizing:'border-box'};
-  const btn={fontSize:14,fontWeight:600,color:'var(--accent-ink)',background:'var(--accent)',border:'none',borderRadius:10,padding:'12px 16px',width:'100%',cursor:busy?'default':'pointer',opacity:busy?0.7:1,fontFamily:'var(--font-ui)'};
-  const lnk={fontSize:13,color:'var(--accent)',background:'none',border:'none',cursor:'pointer',padding:0,fontFamily:'var(--font-ui)',textDecoration:'underline'};
   return(
-    <div id="app" data-theme={sysDark?'dark':'light'} style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:24,padding:24,background:'var(--bg)'}}>
-      <HeftMark size={44}/>
-      <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6,textAlign:'center'}}>
-        <span style={{fontFamily:"'Bricolage Grotesque','Hanken Grotesk',sans-serif",fontSize:28,fontWeight:700,color:'var(--text)',letterSpacing:'-0.02em'}}>Heft</span>
-        <span style={{fontSize:14,color:'var(--text-dim)'}}>Prioritize what matters</span>
+    <div id="app" data-theme={sysDark?'dark':'light'} className="login">
+      <div className="login__hero">
+        <HeftMark size={42}/>
+        <h1 className="login__brand">Heft</h1>
+        <span className="login__stamp">Prioritize what matters</span>
       </div>
-      <form onSubmit={submit} style={{display:'flex',flexDirection:'column',gap:10,width:'100%',maxWidth:320}}>
+      <form onSubmit={submit} className="login__card">
         {mode==='signup'&&(
           <div style={{display:'flex',gap:10}}>
-            <input style={inp} type="text" value={first} placeholder="First name" autoFocus onChange={(e)=>setFirst(e.target.value)}/>
-            <input style={inp} type="text" value={last} placeholder="Last name" onChange={(e)=>setLast(e.target.value)}/>
+            <input className="login__input" type="text" value={first} placeholder="First name" autoFocus onChange={(e)=>setFirst(e.target.value)}/>
+            <input className="login__input" type="text" value={last} placeholder="Last name" onChange={(e)=>setLast(e.target.value)}/>
           </div>
         )}
-        <input style={inp} type="email" value={email} placeholder="you@example.com" onChange={(e)=>setEmail(e.target.value)}/>
-        <input style={inp} type="password" value={password} placeholder="Password (6+ characters)" onChange={(e)=>setPassword(e.target.value)}/>
-        {error&&<p style={{margin:0,fontSize:12,color:'var(--danger)',textAlign:'center'}}>{error}</p>}
-        <button type="submit" style={btn} disabled={busy||!email.trim()||!password.trim()}>{busy?(mode==='signup'?'Creating…':'Signing in…'):(mode==='signup'?'Create account':'Sign in')}</button>
-        <p style={{margin:0,textAlign:'center',fontSize:13,color:'var(--text-dim)'}}>
-          {mode==='signin'?<React.Fragment>No account? <button type="button" style={lnk} onClick={()=>{setMode('signup');setError('');}}>Create one</button></React.Fragment>:<React.Fragment>Have an account? <button type="button" style={lnk} onClick={()=>{setMode('signin');setError('');}}>Sign in</button></React.Fragment>}
+        <input className="login__input" type="email" value={email} placeholder="you@example.com" onChange={(e)=>setEmail(e.target.value)}/>
+        <input className="login__input" type="password" value={password} placeholder="Password (6+ characters)" onChange={(e)=>setPassword(e.target.value)}/>
+        {error&&<p className="login__err">{error}</p>}
+        <button type="submit" className="login__cta" disabled={busy||!email.trim()||!password.trim()}>{busy?(mode==='signup'?'Creating…':'Signing in…'):(mode==='signup'?'Create account':'Sign in')}</button>
+        <p className="login__alt">
+          {mode==='signin'?<React.Fragment>No account? <button type="button" className="login__lnk" onClick={()=>{setMode('signup');setError('');}}>Create one</button></React.Fragment>:<React.Fragment>Have an account? <button type="button" className="login__lnk" onClick={()=>{setMode('signin');setError('');}}>Sign in</button></React.Fragment>}
         </p>
       </form>
+      <span className="login__foot">Your day, weighed.</span>
     </div>
   );
 }
@@ -3098,11 +3176,9 @@ function AppSplash(){
       </svg>
       <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6,
                    animation:'heftWordIn .5s ease both .5s'}}>
-        <span style={{fontFamily:'var(--font-display)',fontSize:32,fontWeight:800,
-                      color:'var(--text)',letterSpacing:'-0.03em',lineHeight:1}}>Heft</span>
-        <span style={{fontSize:13,color:'var(--text-dim)',letterSpacing:'0.01em'}}>
-          Prioritize what matters.
-        </span>
+        <span style={{fontFamily:'var(--font-serif)',fontSize:34,fontWeight:600,
+                      color:'var(--text)',letterSpacing:'-0.02em',lineHeight:1}}>Heft</span>
+        <span className="splash__stamp">Prioritize what matters</span>
       </div>
     </div>
   );
