@@ -1123,6 +1123,16 @@ button:focus:not(:focus-visible),input:focus:not(:focus-visible),textarea:focus:
   .fab:active,.movepill:active,.chip:active,.viewtoggle__opt:active,.btn:active,
   .datenav__arrow:active,.datebar__arrow:active,.apptop__gear:active,.card__subs:active{transform:none!important;}
 }
+
+/* Mobile dock (v0.19.4): "Carry over" + "Add task" rendered as identical stacked pills.
+   Fixes a source-order bug where the later base .fabdock rule clobbered the mobile
+   overrides (display flipped to block; align-items reverted to center), leaving the two
+   buttons different widths. width:max-content sizes the dock to the wider button and
+   align-items:stretch makes the narrower one match it. Right-aligned, equal size. */
+@media(max-width:479px){
+  .fabdock{display:flex;flex-direction:column;align-items:stretch;gap:8px;width:max-content;position:fixed;left:auto;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));}
+  .fabdock .fab,.fabdock .movepill{width:auto;justify-content:center;font-size:14px;padding:0 20px;min-height:52px;border-radius:999px;box-sizing:border-box;}
+}
 </style>
 </head>
 <body>
@@ -2467,7 +2477,7 @@ function SettingsModal({profile,userId,dark,setDark,view,setView,typeface,setTyp
 }
 
 // ===== INITIAL DATA =====
-const HEFT_VERSION='0.19.3';
+const HEFT_VERSION='0.19.4';
 const TPL_ICONS=['camera','star','briefcase','users','cal','mappin','mail','package','globe','palette','music','coffee','zap','heart','filetext','repeat'];
 function todayKeyNow(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
 
